@@ -4,14 +4,22 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/*
+|--------------------------------------------------------------------------
+| Database TES PPDB SMK																													
+|--------------------------------------------------------------------------
+*/
+
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
+		protected $dates = ['deleted_at'];
     /**
      * The attributes that are mass assignable.
      *
@@ -19,8 +27,9 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
+				'username',
         'password',
+				'level_id',
     ];
 
     /**
@@ -41,4 +50,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+		public function level()
+		{
+			return $this->belongsTo(UserLevel::class, 'level_id','id');
+		}
 }
