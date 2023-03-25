@@ -1,0 +1,88 @@
+:root {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: roboto, arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+}
+
+#wrapper {
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+#sidebar {
+  width: 100%;
+  min-width: 240px;
+  max-width: 240px;
+  overflow: hidden auto;
+  transition: 300ms;
+}
+#sidebar.collapsed {
+  margin-left: -240px;
+}
+#sidebar.fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+#main {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+}
+#mainContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+#navbar {
+  min-height: max-content;
+}
+#navbarContainer {
+  max-width: 1150px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5em;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+#content {
+  flex: 1;
+}
+
+#footer {
+  min-height: max-content;
+}
+#footerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+/*# sourceMappingURL=dashboard.css.map */

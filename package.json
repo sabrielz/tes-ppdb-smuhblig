@@ -2,7 +2,13 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "serve": "php -S localhost:8000 -t public",
+        "tw:watch": "tailwindcss -o public/assets/css/tailwind.css -w",
+
+        "bundle": "rollup -c && minify-all-js public/assets/js",
+        "bundle:dashboard": "npm run rollup:dashboard && npm run minify:dashboard",
+        "minify:dashboard": "minify public/assets/js/dashboard.js > public/assets/js/dashboard.min.js"
     },
     "devDependencies": {
         "axios": "^1.1.2",
