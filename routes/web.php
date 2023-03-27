@@ -18,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/dashboard', fn () => view('dashboard.index'));
+Route::get('/tes', function() {
+	dd(\App\Models\Question::with('jurusan')->get());
+});

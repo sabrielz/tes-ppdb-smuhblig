@@ -17,18 +17,17 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::create([
-            'name' => 'Super Admin',
-            'username' => 'super-admin',
-            'password' => Hash::make('superadmin'),
-						'level_id' => 5
-        ]);
+        // \App\Models\User::create([
+        //     'name' => 'Super Admin',
+        //     'username' => 'super-admin',
+        //     'password' => Hash::make('superadmin'),
+				// 		'level_id' => 5
+        // ]);
 
 				$this->call([
-					JurusanSeeder::class,
 					QuestionSeeder::class,
 					QuestionTypeSeeder::class,
-					UserLevelSeeder::class,
+					// UserLevelSeeder::class,
 				]);
     }
 }

@@ -4,11 +4,13 @@ namespace App\Models\PPDB;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Verifikasi extends Model
 {
-    use HasFactory;
-
+    use HasFactory, SoftDeletes;
+		
+		protected $dates = ['deleted_at'];
 		protected $connection = 'mysql1';
 		protected $table = 'verifikasis';
 		protected $with = ['student'];

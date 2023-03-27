@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\PPDB;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,9 +17,11 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable;
 
-		protected $dates = ['deleted_at'];
+		protected $connection = 'mysql1';
+		protected $with = ['level', 'identitas'];
+		
     /**
      * The attributes that are mass assignable.
      *
@@ -29,6 +31,8 @@ class User extends Authenticatable
         'name',
 				'username',
         'password',
+				'avatar',
+				'identitas_id',
 				'level_id',
     ];
 
@@ -54,5 +58,10 @@ class User extends Authenticatable
 		public function level()
 		{
 			return $this->belongsTo(UserLevel::class, 'level_id','id');
+		}
+
+		public function identitas()
+		{
+			return $this->belongsTo(Identitas::class, 'identitas_id', 'id');
 		}
 }

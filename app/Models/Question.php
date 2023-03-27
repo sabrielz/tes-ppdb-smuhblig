@@ -11,6 +11,7 @@ class Question extends Model
 		use SoftDeletes;
     use HasFactory;
 
+		protected $connection = 'mysql';
 		protected $dates = ['deleted_at'];
 
 		public function type()
@@ -20,6 +21,6 @@ class Question extends Model
 
 		public function jurusan()
 		{
-			return $this->belongsToMany(Jurusan::class);
+			return $this->belongsToMany(\App\Models\PPDB\Jurusan::class, env('DB_DATABASE').'.jurusan_question');
 		}
 }

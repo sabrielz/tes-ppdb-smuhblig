@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
 						$table->foreignId('question_id');
-						$table->string('student_name');
-						$table->string('student_code');
+						$table->foreignId('student_id');
 						$table->text('answer');
             $table->timestamps();
 						$table->dateTime('deleted_at')->nullable();

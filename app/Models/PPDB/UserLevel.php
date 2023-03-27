@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\PPDB;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UserLevel extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
 		public $timestamps = false;
 		protected $guarded = ['id'];
-		protected $dates = ['deleted_at'];
+		protected $connection = 'mysql1';
 }
