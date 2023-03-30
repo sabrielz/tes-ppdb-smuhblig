@@ -41,15 +41,17 @@ class Config extends Model
     /**
      * Get config value from key
      */
-    public static function getConfig(string $key, mixed $default = []) :mixed
+    public static function getConfig(string $key, mixed $default = [], array ...$options) :mixed
     {
         $configs = static::getConfigs();
+        if (!$configs or empty($configs) or !array_key_exists($key, $configs)) return $default;
 
-        if (!$configs or !array_key_exists($key, $configs)) {
-            return $default;
+        $configs = $configs[$key];
+        if (($options['get_value_only'] ?? true)) {
+            $configs = $configs['value'];
         }
 
-        return Cache::rememberForever("config_$key", fn() => $configs[$key]);
+        return Cache::rememberForever("config_$key", fn() => $configs);
     }
 
 }
