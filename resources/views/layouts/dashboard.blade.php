@@ -1,44 +1,43 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-	{{-- Metadata --}}
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+@extends('layouts.main')
 
-	<title>Document</title>
+@pushOnce('html_styles')
 
-	{{-- Assets --}}
-	<link rel="stylesheet" href="{{ asset('assets/css/dashboard.css') }}">
-	<link rel="stylesheet" href="{{ asset('assets/css/tailwind.css') }}">
-</head>
-<body>
+@endPushOnce
 
-	{{-- Dashboard Wrapper --}}
-	<div id="wrapper">
+@pushOnce('html_scripts')
 
-		<!-- Sidebar -->
+@endPushOnce
+
+@pushOnce('html_body_tag') class="hold-transition sidebar-mini" @endPushOnce
+@section('html_body')
+	<div class="wrapper">
+		{{-- Navbar --}}
+		<x-dashboard.navbar />
+
+		{{-- Sidebar --}}
 		<x-dashboard.sidebar />
 
-		<!-- Content -->
-		<main id="main">
-			<div id="mainContainer">
-				<!-- Navbar -->
-				<x-dashboard.navbar />
+		<div class="content-wrapper">
+			<div class="content-header">
+				<div class="container-fluid">
+					<x-dashboard.breadcrumb />
+				</div>
+			</div>
 
-				<!-- Main -->
-				<div id="content" class="bg-slate-700">
-					<div id="contentContainer" class="">
-						@yield('main')
+			<div class="content">
+				<div class="container-fluid">
+					<div class="row">
+						@yield('content')
 					</div>
 				</div>
-
-				<!-- Footer -->
-				<x-dashboard.footer />
 			</div>
-		</main>
-	</div>
+		</div>
 
-	{{-- Scripts --}}
-	<script src="{{ asset('assets/js/dashboard.js') }}"></script>
-</html>
+		{{-- Rightbar --}}
+		{{-- <x-dashboard.rightbar /> --}}
+
+		{{-- Footer --}}
+		<x-dashboard.footer />
+
+	</div>
+@endsection
