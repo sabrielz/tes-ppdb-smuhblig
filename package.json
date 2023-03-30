@@ -8,7 +8,9 @@
 
         "bundle": "rollup -c && minify-all-js public/assets/js",
         "bundle:dashboard": "npm run rollup:dashboard && npm run minify:dashboard",
-        "minify:dashboard": "minify public/assets/js/dashboard.js > public/assets/js/dashboard.min.js"
+        "minify:dashboard": "minify public/assets/js/dashboard.js > public/assets/js/dashboard.min.js",
+
+        "git:log": "git log --all --graph --decorate --oneline"
     },
     "devDependencies": {
         "axios": "^1.1.2",

@@ -17,4 +17,19 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/dashboard', fn () => view('dashboard.index'));
+// Route::get('/', fn () => view('pages.index'));
+// Route::get('/dashboard', fn () => view('dashboard.index'));
+Route::get('/dashboard/questions', fn () => view('dashboard.index'));
+Route::get('/dashboard/room', fn () => view('dashboard.index'));
+Route::get('/tes', function() {
+	// dd(\App\Models\Question::with('jurusan')->get());
+    dd(\App\Models\Config::getConfig('metadata', []));
+});
+
+Route::prefix('/dashboard')->middleware('guest')->group(function () {
+
+    Route::controller(\App\Http\Controllers\DashboardController::class)->group(function () {
+        Route::get('/', 'index')->name('dashboard.index');
+    });
+
+});

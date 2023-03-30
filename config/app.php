@@ -195,6 +195,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /**
+         * Custom Service Providers...
+         */
+        App\Providers\MetadataServiceProvider::class,
+
     ],
 
     /*
@@ -209,7 +214,9 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Arr' => Illuminate\Support\Arr::class,
+        'Str' => Illuminate\Support\Str::class,
+        'Collection' => Illuminate\Support\Collection::class,
     ])->toArray(),
 
 ];
