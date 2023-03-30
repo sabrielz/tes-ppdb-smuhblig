@@ -28,27 +28,59 @@ class ConfigSeeder extends Seeder
                 ])
             ],
             [
-                'name' => 'Dashboard Sidebar Menu Item',
-                'key' => 'dashboard_sidebar_menu_items',
+                'name' => 'Dashboard Sidebar Brand',
+                'key' => 'dashboard_sidebar_brand',
                 'value' => json_encode([
-                    [
-                        'label' => 'Home',
-                        'icon' => 'fas fa-home',
-                    ],
-                    [
-                        'label' => 'Settings',
-                        'icon' => 'fas fa-cogs',
-                        'dropdowns' => [
-                            [
-                                'label' => 'General',
-                            ],
-                            [
-                                'label' => 'Preferences',
-                            ],
-                        ]
-                    ],
+                    'logo' => []
                 ])
             ],
+            [
+                'name' => 'Dashboard Sidebar Menu',
+                'key' => 'dashboard_sidebar_menu',
+                'value' => json_encode([
+                    [
+                        'title' => 'Main Menu',
+                        'items' => [
+                            [
+                                'title' => 'Home',
+                                'icon' => 'home',
+                            ],
+                            [
+                                'title' => 'Settings',
+                                'icon' => 'settings',
+                                'dropdowns' => [
+                                    [
+                                        'title' => 'General',
+                                    ],
+                                    [
+                                        'title' => 'Preferences',
+                                    ],
+                                ]
+                            ],
+                        ]
+                    ]
+                ])
+            ],
+            [
+                'name' => 'Appearance',
+                'key' => 'appearance',
+                'value' => json_encode([
+                    'theme' => 'light',
+                ])
+            ],
+            [
+                'name' => 'Metadata Collection',
+                'key' => 'metadata',
+                'value' => json_encode([
+                    '/' => [
+                        'title' => 'Beranda'
+                    ],
+                    '/dashboard' => ['title' => 'Beranda'],
+                    '/dashboard/question' => ['title' => 'Kelola Soal'],
+                    '/dashboard/room' => ['title' => 'Ruang Tes'],
+                    '/dashboard/statistic' => ['title' => 'Kelola Data'],
+                ])
+            ]
         ]);
     }
 }
