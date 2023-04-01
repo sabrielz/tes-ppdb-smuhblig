@@ -23,4 +23,19 @@ class Question extends Model
 		{
 			return $this->belongsToMany(\App\Models\PPDB\Jurusan::class, env('DB_DATABASE').'.jurusan_question');
 		}
+
+		public function scopeFilter($query, array $filters)
+		{
+			// FILTER JURUSAN $id
+			$query->when($filters['jurusan'] ?? false, function($query, $jurusan) {
+				$query->whereHas('jurusan', function($q) use ($jurusan) {
+					return $q->where('jurusan_id', $jurusan);
+				});
+			});
+
+			// FILTER TYPE $id
+			$query->when($filters['type'] ?? false, function($query, $type) {
+				return $query->where('type_id', $type);
+			});
+		}
 }

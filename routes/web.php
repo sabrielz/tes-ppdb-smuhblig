@@ -22,8 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/dashboard/questions', fn () => view('dashboard.index'));
 Route::get('/dashboard/room', fn () => view('dashboard.index'));
 Route::get('/tes', function() {
-	// dd(\App\Models\Question::with('jurusan')->get());
-    dd(\App\Models\Config::getConfig('metadata', []));
+	dd(\App\Models\Question::filter(['jurusan' => 2])->with('jurusan')->get());
+	// dd(\App\Models\Question::with('jurusan')->get('id'));
+	// dd(\App\Models\Config::getConfig('metadata', []));
 });
 
 Route::prefix('/dashboard')->middleware('guest')->group(function () {
