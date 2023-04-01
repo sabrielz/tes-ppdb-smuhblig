@@ -77,7 +77,8 @@ class ConfigSeeder extends Seeder
                     ],
                     '/dashboard' => ['title' => 'Beranda'],
                     '/dashboard/question' => ['title' => 'Kelola Soal'],
-                    '/dashboard/room' => ['title' => 'Ruang Tes'],
+                    '/dashboard/loby' => ['title' => 'Pilih Siswa'],
+                    '/dashboard/test' => ['title' => 'Ruang Tes'],
                     '/dashboard/statistic' => ['title' => 'Kelola Data'],
                 ])
             ]

@@ -41,16 +41,22 @@ class Sidebar extends Component
                     'dropdowns' => [
                         [
                             'label' => 'Ruang Tes',
-                            'href' => '/dashboard/room?test=wawancara',
+                            'href' => '/dashboard/loby?test=wawancara',
                             'icon' => 'fa fa-sign-in-alt'
                         ],
                         [
                             'label' => 'Kelola Soal',
-                            'href' => '/dashboard/questions?test=wawancara',
+                            'href' => '/dashboard/question?test=wawancara',
                             'icon' => 'fa fa-list-ol',
+                        ],
+                        [
+                            'label' => 'Kelola Data',
+                            'href' => '/dashboard/statistic?test=wawancara',
+                            'icon' => 'fa fa-database',
                         ],
                     ]
                 ],
+
                 [
                     'label' => 'Tes Fisik',
                     'href' => '/dashboard/test/fisik',
@@ -59,33 +65,14 @@ class Sidebar extends Component
                     'dropdowns' => [
                         [
                             'label' => 'Ruang Tes',
-                            'href' => '/dashboard/room?test=fisik',
+                            'href' => '/dashboard/loby?test=fisik',
                             'icon' => 'fa fa-sign-in-alt'
                         ],
                         [
-                            'label' => 'Kelola Soal',
-                            'href' => '/dashboard/questions?test=fisik',
-                            'icon' => 'fa fa-list-ol',
-                        ],
-                    ]
-                ],
-                [
-                    'label' => 'Kelola Data',
-                    'href' => '/dashboard/statistic*',
-                    'icon' => 'fa fa-database',
-                    'dropdowns' => [
-                        [
-                            'label' => 'Fisik',
+                            'label' => 'Kelola Data',
                             'href' => '/dashboard/statistic?test=fisik',
-                            'icon' => 'fa',
-                            'icontext' => 'F',
-                        ],
-                        [
-                            'label' => 'Wawancara',
-                            'href' => '/dashboard/statistic?test=wawancara',
-                            'icon' => 'fa',
-                            'icontext' => 'W',
-                        ],
+                            'icon' => 'fa fa-database',
+                        ]
                     ]
                 ],
 

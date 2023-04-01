@@ -14,50 +14,50 @@ class QuestionSeeder extends Seeder
     public function run(): void
     {
         $payload = [
-					[
-						'type_id' => mt_rand(1,3),
-						'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem dolor, atque earum quasi, ad nemo, voluptate facere nihil voluptates neque eaque. Eius laudantium atque rem expedita id iusto. Non qui sit asperiores, quis, iure, suscipit itaque soluta quod quos ipsam iusto cupiditate enim reiciendis voluptates alias vitae minus debitis. Culpa.'
-					],
-					[
-						'type_id' => mt_rand(1,3),
-						'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem dolor, atque earum quasi, ad nemo, voluptate facere nihil voluptates neque eaque. Eius laudantium atque rem expedita id iusto. Non qui sit asperiores, quis, iure, suscipit itaque soluta quod quos ipsam iusto cupiditate enim reiciendis voluptates alias vitae minus debitis. Culpa.'
-					],
-					[
-						'type_id' => mt_rand(1,3),
-						'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem dolor, atque earum quasi, ad nemo, voluptate facere nihil voluptates neque eaque. Eius laudantium atque rem expedita id iusto. Non qui sit asperiores, quis, iure, suscipit itaque soluta quod quos ipsam iusto cupiditate enim reiciendis voluptates alias vitae minus debitis. Culpa.'
-					],
-					[
-						'type_id' => mt_rand(1,3),
-						'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem dolor, atque earum quasi, ad nemo, voluptate facere nihil voluptates neque eaque. Eius laudantium atque rem expedita id iusto. Non qui sit asperiores, quis, iure, suscipit itaque soluta quod quos ipsam iusto cupiditate enim reiciendis voluptates alias vitae minus debitis. Culpa.'
-					],
-					[
-						'type_id' => mt_rand(1,3),
-						'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem dolor, atque earum quasi, ad nemo, voluptate facere nihil voluptates neque eaque. Eius laudantium atque rem expedita id iusto. Non qui sit asperiores, quis, iure, suscipit itaque soluta quod quos ipsam iusto cupiditate enim reiciendis voluptates alias vitae minus debitis. Culpa.'
-					],
-					[
-						'type_id' => mt_rand(1,3),
-						'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem dolor, atque earum quasi, ad nemo, voluptate facere nihil voluptates neque eaque. Eius laudantium atque rem expedita id iusto. Non qui sit asperiores, quis, iure, suscipit itaque soluta quod quos ipsam iusto cupiditate enim reiciendis voluptates alias vitae minus debitis. Culpa.'
-					],
-					[
-						'type_id' => mt_rand(1,3),
-						'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem dolor, atque earum quasi, ad nemo, voluptate facere nihil voluptates neque eaque. Eius laudantium atque rem expedita id iusto. Non qui sit asperiores, quis, iure, suscipit itaque soluta quod quos ipsam iusto cupiditate enim reiciendis voluptates alias vitae minus debitis. Culpa.'
-					],
-					[
-						'type_id' => mt_rand(1,3),
-						'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem dolor, atque earum quasi, ad nemo, voluptate facere nihil voluptates neque eaque. Eius laudantium atque rem expedita id iusto. Non qui sit asperiores, quis, iure, suscipit itaque soluta quod quos ipsam iusto cupiditate enim reiciendis voluptates alias vitae minus debitis. Culpa.'
-					],
-					[
-						'type_id' => mt_rand(1,3),
-						'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem dolor, atque earum quasi, ad nemo, voluptate facere nihil voluptates neque eaque. Eius laudantium atque rem expedita id iusto. Non qui sit asperiores, quis, iure, suscipit itaque soluta quod quos ipsam iusto cupiditate enim reiciendis voluptates alias vitae minus debitis. Culpa.'
-					],
-					[
-						'type_id' => mt_rand(1,3),
-						'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem dolor, atque earum quasi, ad nemo, voluptate facere nihil voluptates neque eaque. Eius laudantium atque rem expedita id iusto. Non qui sit asperiores, quis, iure, suscipit itaque soluta quod quos ipsam iusto cupiditate enim reiciendis voluptates alias vitae minus debitis. Culpa.'
-					],
-				];
+            [
+                'type_id' => mt_rand(1, 3),
+                'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem dolor, atque earum quasi, ad nemo, voluptate facere nihil voluptates neque eaque. Eius laudantium atque rem expedita id iusto. Non qui sit asperiores, quis, iure, suscipit itaque soluta quod quos ipsam iusto cupiditate enim reiciendis voluptates alias vitae minus debitis. Culpa.'
+            ],
+            [
+                'type_id' => mt_rand(1, 3),
+                'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem dolor, atque earum quasi, ad nemo, voluptate facere nihil voluptates neque eaque. Eius laudantium atque rem expedita id iusto. Non qui sit asperiores, quis, iure, suscipit itaque soluta quod quos ipsam iusto cupiditate enim reiciendis voluptates alias vitae minus debitis. Culpa.'
+            ],
+            [
+                'type_id' => mt_rand(1, 3),
+                'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem dolor, atque earum quasi, ad nemo, voluptate facere nihil voluptates neque eaque. Eius laudantium atque rem expedita id iusto. Non qui sit asperiores, quis, iure, suscipit itaque soluta quod quos ipsam iusto cupiditate enim reiciendis voluptates alias vitae minus debitis. Culpa.'
+            ],
+            [
+                'type_id' => mt_rand(1, 3),
+                'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem dolor, atque earum quasi, ad nemo, voluptate facere nihil voluptates neque eaque. Eius laudantium atque rem expedita id iusto. Non qui sit asperiores, quis, iure, suscipit itaque soluta quod quos ipsam iusto cupiditate enim reiciendis voluptates alias vitae minus debitis. Culpa.'
+            ],
+            [
+                'type_id' => mt_rand(1, 3),
+                'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem dolor, atque earum quasi, ad nemo, voluptate facere nihil voluptates neque eaque. Eius laudantium atque rem expedita id iusto. Non qui sit asperiores, quis, iure, suscipit itaque soluta quod quos ipsam iusto cupiditate enim reiciendis voluptates alias vitae minus debitis. Culpa.'
+            ],
+            [
+                'type_id' => mt_rand(1, 3),
+                'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem dolor, atque earum quasi, ad nemo, voluptate facere nihil voluptates neque eaque. Eius laudantium atque rem expedita id iusto. Non qui sit asperiores, quis, iure, suscipit itaque soluta quod quos ipsam iusto cupiditate enim reiciendis voluptates alias vitae minus debitis. Culpa.'
+            ],
+            [
+                'type_id' => mt_rand(1, 3),
+                'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem dolor, atque earum quasi, ad nemo, voluptate facere nihil voluptates neque eaque. Eius laudantium atque rem expedita id iusto. Non qui sit asperiores, quis, iure, suscipit itaque soluta quod quos ipsam iusto cupiditate enim reiciendis voluptates alias vitae minus debitis. Culpa.'
+            ],
+            [
+                'type_id' => mt_rand(1, 3),
+                'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem dolor, atque earum quasi, ad nemo, voluptate facere nihil voluptates neque eaque. Eius laudantium atque rem expedita id iusto. Non qui sit asperiores, quis, iure, suscipit itaque soluta quod quos ipsam iusto cupiditate enim reiciendis voluptates alias vitae minus debitis. Culpa.'
+            ],
+            [
+                'type_id' => mt_rand(1, 3),
+                'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem dolor, atque earum quasi, ad nemo, voluptate facere nihil voluptates neque eaque. Eius laudantium atque rem expedita id iusto. Non qui sit asperiores, quis, iure, suscipit itaque soluta quod quos ipsam iusto cupiditate enim reiciendis voluptates alias vitae minus debitis. Culpa.'
+            ],
+            [
+                'type_id' => mt_rand(1, 3),
+                'question' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem dolor, atque earum quasi, ad nemo, voluptate facere nihil voluptates neque eaque. Eius laudantium atque rem expedita id iusto. Non qui sit asperiores, quis, iure, suscipit itaque soluta quod quos ipsam iusto cupiditate enim reiciendis voluptates alias vitae minus debitis. Culpa.'
+            ],
+        ];
 
-				foreach ($payload as $value) {
-					Question::create($value);
-				}
+        foreach ($payload as $value) {
+            Question::create($value);
+        }
     }
 }
