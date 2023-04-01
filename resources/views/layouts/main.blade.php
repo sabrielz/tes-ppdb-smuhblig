@@ -10,12 +10,14 @@
 	{{-- Dynamic Metadata --}}
 	<title>{{ $metadata['title'] ?? '' }}</title>
 
-	{{-- Assets --}}
+	{{-- Fonts --}}
 	@if (env('APP_ENV') === 'production')
 		<link aria-label="Google Font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> <!-- Google Font: Source Sans Pro -->
 	@endif
+
   <link aria-label="Fontawesome Icons" rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css"> <!-- Font Awesome Icons -->
   <link aria-label="Adminlte CommonCSS" rel="stylesheet" href="/assets/css/adminlte.min.css"> <!-- Theme style -->
+	<style> label { margin: 0 } </style>
 
 	@stack('html_styles')
 </head>

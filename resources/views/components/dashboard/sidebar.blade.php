@@ -55,7 +55,7 @@
 							</a>
 							<ul class="nav nav-treeview">
 								@foreach ($item['dropdowns'] as $dropdown)
-									<li class="nav-item">
+									<li class="nav-item pl-2">
 										<a href="{{ $dropdown['href'] ?? '' }}"
 											title="{{ $dropdown['title'] ?? $dropdown['label'] ?? '' }}"
 											class="nav-link {{ is_active_link($dropdown)?'active':'' }}">

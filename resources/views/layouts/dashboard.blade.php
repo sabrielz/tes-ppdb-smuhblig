@@ -1,12 +1,12 @@
 @extends('layouts.main')
 
-@pushOnce('html_styles')
+{{-- @pushOnce('html_styles')
 
 @endPushOnce
 
 @pushOnce('html_scripts')
 
-@endPushOnce
+@endPushOnce --}}
 
 @pushOnce('html_body_tag') class="hold-transition sidebar-mini" @endPushOnce
 @section('html_body')
@@ -26,15 +26,10 @@
 
 			<div class="content">
 				<div class="container-fluid">
-					<div class="row">
-						@yield('content')
-					</div>
+					@yield('content')
 				</div>
 			</div>
 		</div>
-
-		{{-- Rightbar --}}
-		{{-- <x-dashboard.rightbar /> --}}
 
 		{{-- Footer --}}
 		<x-dashboard.footer />
