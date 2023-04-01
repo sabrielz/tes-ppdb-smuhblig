@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\StatisticController;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,17 +25,41 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('/', fn () => view('pages.index'));
 // Route::get('/dashboard', fn () => view('dashboard.index'));
-Route::get('/dashboard/questions', fn () => view('dashboard.index'));
-Route::get('/dashboard/room', fn () => view('dashboard.index'));
-Route::get('/tes', function() {
-	// dd(\App\Models\Question::with('jurusan')->get());
-    dd(\App\Models\Config::getConfig('metadata', []));
+// Route::get('/dashboard/questions', fn () => view('dashboard.index'));
+// Route::get('/dashboard/room', fn () => view('dashboard.index'));
+// Route::get('/tes', function() {
+// 	// dd(\App\Models\Question::with('jurusan')->get());
+//     dd(\App\Models\Config::getConfig('metadata', []));
+// });
+
+Route::get('/', fn () => redirect( route('login.index') ))->name('index');
+
+Route::controller(LoginController::class)->middleware('guest')->group(function () {
+    Route::get('/login', 'index')->name('login.index');
+    Route::post('/login', 'login')->name('login.post');
+    Route::get('/logout', 'logout')->name('logout');
 });
 
-Route::prefix('/dashboard')->middleware('guest')->group(function () {
+Route::prefix('/dashboard')->group(function () {
 
-    Route::controller(\App\Http\Controllers\DashboardController::class)->group(function () {
+    Route::controller(DashboardController::class)->group(function () {
         Route::get('/', 'index')->name('dashboard.index');
+    });
+
+    Route::controller(RoomController::class)->middleware(['test'])->group(function () {
+        Route::get('/loby', 'index')->name('dashboard.loby.index');
+    });
+
+    Route::controller(TestController::class)->middleware(['test'])->group(function () {
+        Route::get('/test', 'index')->name('dashboard.test.index');
+    });
+
+    Route::controller(QuestionController::class)->middleware(['test'])->group(function () {
+        Route::get('/question', 'index')->name('dashboard.question.index');
+    });
+
+    Route::controller(StatisticController::class)->middleware(['test'])->group(function () {
+        Route::get('/statistic', 'index')->name('dashboard.statistic.index');
     });
 
 });

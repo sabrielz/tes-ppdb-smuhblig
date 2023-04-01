@@ -199,6 +199,7 @@ return [
          * Custom Service Providers...
          */
         App\Providers\MetadataServiceProvider::class,
+        App\Providers\ViewServiceProvider::class,
 
     ],
 
