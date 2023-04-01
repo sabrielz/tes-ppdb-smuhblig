@@ -14,3 +14,17 @@ if (!function_exists('is_active_link')) {
         return request()->is($href);
     }
 }
+
+if (!function_exists('set_alert')) {
+    function alert(null|array $value = null) :mixed {
+        $result = null;
+
+        if (is_null($value)) {
+            $result = request('alert');
+        } elseif (is_array($value)) {
+            $result = request(['alert' => $value]);
+        }
+
+        return $result;
+    }
+}
