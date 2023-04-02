@@ -28,3 +28,20 @@ if (!function_exists('set_alert')) {
         return $result;
     }
 }
+
+if (!function_exists('merge_url')) {
+    function merge_url(?string $current = null, ...$others) :string {
+        if (is_null($current)) $current = '/'.request()->path();
+        $result = implode('/', [$current, ...$others]);
+        return $result;
+    }
+}
+
+if (!function_exists('merge_url_with_params')) {
+    function merge_url_with_params(?string $current = null, ...$others) :string {
+        $result = merge_url($current, ...$others);
+        $queries = request()->getQueryString();
+        if (strlen($queries) > 0) $result .= "?$queries";
+        return $result;
+    }
+}
