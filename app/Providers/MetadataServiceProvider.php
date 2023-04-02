@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
 class MetadataServiceProvider extends ServiceProvider
@@ -19,16 +20,18 @@ class MetadataServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $metadata = [];
+        if (request()->isMethod('GET')) {
+            $metadata = [];
 
-        $pathname = request()->path();
-        if (strlen($pathname) > 1 && str_split($pathname)[0] !== '/') $pathname = "/$pathname";
+            $pathname = request()->path();
+            $metadatacfg = \App\Models\Config::getConfig('metadata');
+            foreach ($metadatacfg as $pathname => $data) {
+                if (request()->is($pathname)) {
+                    $metadata = $data; break;
+                }
+            }
 
-        $metadatacfg = \App\Models\Config::getConfig('metadata', []);
-        if (array_key_exists($pathname, $metadatacfg)) {
-            $metadata = $metadatacfg[$pathname];
+            \Illuminate\Support\Facades\View::share('metadata', $metadata);
         }
-
-        \Illuminate\Support\Facades\View::share('metadata', $metadata);
     }
 }

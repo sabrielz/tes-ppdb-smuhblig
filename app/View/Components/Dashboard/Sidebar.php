@@ -69,6 +69,11 @@ class Sidebar extends Component
                             'icon' => 'fa fa-sign-in-alt'
                         ],
                         [
+                            'label' => 'Kelola Soal',
+                            'href' => '/dashboard/question?test=fisik',
+                            'icon' => 'fa fa-list-ol',
+                        ],
+                        [
                             'label' => 'Kelola Data',
                             'href' => '/dashboard/statistic?test=fisik',
                             'icon' => 'fa fa-database',

@@ -75,11 +75,12 @@ class ConfigSeeder extends Seeder
                     '/' => [
                         'title' => 'Beranda'
                     ],
-                    '/dashboard' => ['title' => 'Beranda'],
-                    '/dashboard/question' => ['title' => 'Kelola Soal'],
-                    '/dashboard/loby' => ['title' => 'Pilih Siswa'],
-                    '/dashboard/test' => ['title' => 'Ruang Tes'],
-                    '/dashboard/statistic' => ['title' => 'Kelola Data'],
+                    'dashboard' => ['title' => 'Beranda'],
+                    'dashboard/question' => ['title' => 'Kelola Soal'],
+                    'dashboard/question/*/edit' => ['title' => 'Edit Soal'],
+                    'dashboard/loby' => ['title' => 'Pilih Siswa'],
+                    'dashboard/test' => ['title' => 'Ruang Tes'],
+                    'dashboard/statistic' => ['title' => 'Kelola Data'],
                 ])
             ]
         ]);

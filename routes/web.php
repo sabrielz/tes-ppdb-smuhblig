@@ -57,8 +57,11 @@ Route::prefix('/dashboard')->group(function () {
         Route::post('/test', 'store')->name('dashboard.test.store');
     });
 
-    Route::controller(QuestionController::class)->middleware(['test'])->group(function () {
-        Route::get('/question', 'index')->name('dashboard.question.index');
+    Route::controller(QuestionController::class)->group(function () {
+        Route::get('/question', 'index')->middleware(['test'])->name('dashboard.question.index');
+        Route::get('/question/{question}/edit', 'edit')->name('dashboard.question.edit');
+        Route::post('/question/{question}', 'update')->name('dashboard.question.update');
+        Route::get('/question/{question}/delete', 'delete')->name('dashboard.question.delete');
     });
 
     Route::controller(StatisticController::class)->middleware(['test'])->group(function () {
