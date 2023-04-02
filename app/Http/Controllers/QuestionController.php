@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-		private function getFisikQuestions () {
-			// return Question::whereRelation('type', 'name', 'Tes Buta Warna')->get();
-			return Question::filter(['type' => 3, 'type' => 1])->get();
-		}
+    private function getFisikQuestions () {
+        // return Question::whereRelation('type', 'name', 'Tes Buta Warna')->get();
+        return Question::filter(['type' => 3, 'type' => 1])->get();
+    }
 
-		private function getWawancaraQuestions() {
-			return Question::whereRelation('type', 'name', 'Tes Wawancara')->get();
-		}
+    private function getWawancaraQuestions() {
+        return Question::whereRelation('type', 'name', 'Tes Wawancara')->get();
+    }
 
     public function index(Request $req)
     {
@@ -23,7 +23,7 @@ class QuestionController extends Controller
         $question = $this->$method_name();
 
         return view("pages.dashboard.question.index", [
-            'question' => $question
+            'questions' => $question
         ]);
     }
 }
