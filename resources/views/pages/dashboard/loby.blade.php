@@ -19,23 +19,22 @@
 								</div>
 							</div>
 							<input type="hidden" name="test" value="{{ request()->query('test') }}">
-							<input type="text" name="siswa" class="form-control" placeholder="Kode Jurusan: X-000" value="{{ request('siswa') ?? '' }}">
+							<input type="text" name="student" class="form-control" placeholder="Kode Jurusan: X-000" value="{{ request('student') ?? '' }}">
 							<div class="input-group-append">
 								<button type="submit" class="btn rounded-right btn-primary btn-flat">Pilih Siswa</button>
 							</div>
 						</div>
 
 						<div class="input-group">
-							<input type="text" name="siswa" class="form-control" value="Tes {{ Str::title(request()->query('test')) }}" disabled>
+							<input type="text" class="form-control" value="Tes {{ Str::title(request()->query('test')) }}" disabled>
 						</div>
 					</form>
 				</div>
 
 				<div class="col-12 mt-3">
 					<?php $query_param = request()->query->count() ? '?' . request()->getQueryString() : '' ?>
-					<a href="{{ route('dashboard.test.index') . $query_param }}"
-						class="d-block btn btn-success mx-auto">
-						Mulai Tes
+					<a href="{{ route('dashboard.test.index') . $query_param }}" class="d-block btn btn-success mx-auto">
+						Mulai Tes {{ Str::title( request()->query('test') ) }}
 					</a>
 				</div>
 			</div>

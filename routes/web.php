@@ -53,7 +53,7 @@ Route::prefix('/dashboard')->group(function () {
     });
 
     Route::controller(TestController::class)->middleware(['test'])->group(function () {
-        Route::get('/test', 'index')->name('dashboard.test.index');
+        Route::get('/test', 'index')->middleware(['student'])->name('dashboard.test.index');
         Route::post('/test', 'store')->name('dashboard.test.store');
     });
 

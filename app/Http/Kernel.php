@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
         'test' => \App\Http\Middleware\MustHaveTypeQueryParameter::class,
+        'student' => \App\Http\Middleware\MustHaveStudentQueryParameter::class,
     ];
 }

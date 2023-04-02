@@ -16,24 +16,18 @@
 					</div>
 
 					<div class="card-body">
-						<div class="form-group m-0 row">
-							<input type="hidden" name="data[{{ $loop->iteration }}][question_id]" value="{{ $quest->id }}">
-							{{-- <label for="" class="col-md-4">
-								Jawaban
-							</label> --}}
+							<textarea type="text"
+								name="answer[{{ $quest->id }}]"
+								id="input-quest-{{ $quest->id }}"
+								placeholder="Jawaban..."
+								class="form-control"
+							></textarea>
 
-							{{-- <div class="input-group m-0 col-md-8"> --}}
-								<textarea type="text"
-									name="data[{{ $loop->iteration }}][answer]"
-									id="input-quest-{{ $quest->id }}"
-									placeholder="Jawaban..."
-									class="form-control"
-								></textarea>
-								@error('data.answer')
+							@error('answer.answer')
+								<p class="m-0 text-danger">
 									{{ $message }}
-								@enderror
-							{{-- </div> --}}
-						</div>
+								</p>
+							@enderror
 					</div>
 				</div>
 			@endforeach
