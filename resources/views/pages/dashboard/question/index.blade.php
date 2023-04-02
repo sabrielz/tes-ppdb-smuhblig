@@ -4,8 +4,8 @@
 	<div class="row">
 
 		<div class="col-12 card card-default">
-			<div class="card-body">
-				<table class="table w-100">
+			<div class="card-body p-1">
+				<table class="table table-hovered table-striped w-100">
 					<thead>
 						<th>No.</th>
 						<th>Pertanyaan</th>
@@ -20,8 +20,13 @@
 								<td>{{ 'No field yet' }}</td>
 								<td>
 									<div class="btn-group btn-group-sm">
-										<a href="javascript:void()" class="btn btn-default">
+										{{-- Button Edit --}}
+										<a href="{{ merge_url(null, $quest->id, 'edit') }}" class="btn btn-warning">
 											<i class="fa fa-pen"></i>
+										</a>
+										{{-- Button Hapus --}}
+										<a href="{{ merge_url(null, $quest->id, 'delete') }}" class="btn btn-danger">
+											<i class="fa fa-trash"></i>
 										</a>
 									</div>
 								</td>
