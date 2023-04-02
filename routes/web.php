@@ -27,10 +27,12 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/dashboard', fn () => view('dashboard.index'));
 // Route::get('/dashboard/questions', fn () => view('dashboard.index'));
 // Route::get('/dashboard/room', fn () => view('dashboard.index'));
-// Route::get('/tes', function() {
+Route::get('/tes', function() {
 // 	// dd(\App\Models\Question::with('jurusan')->get());
 //     dd(\App\Models\Config::getConfig('metadata', []));
-// });
+		dd(\App\Models\Question::whereRelation('type', 'name', 'Tes Buta Warna')->get());
+
+});
 
 Route::get('/', fn () => redirect( route('login.index') ))->name('index');
 
@@ -52,6 +54,7 @@ Route::prefix('/dashboard')->group(function () {
 
     Route::controller(TestController::class)->middleware(['test'])->group(function () {
         Route::get('/test', 'index')->name('dashboard.test.index');
+        Route::post('/test', 'store')->name('dashboard.test.store');
     });
 
     Route::controller(QuestionController::class)->middleware(['test'])->group(function () {

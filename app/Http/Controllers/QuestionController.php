@@ -7,10 +7,14 @@ use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-    private function getWawancaraQuestion()
-    {
-        return Question::whereRelation('question', 'name', 'Tes Wawancara')->get();
-    }
+		private function getFisikQuestions () {
+			// return Question::whereRelation('type', 'name', 'Tes Buta Warna')->get();
+			return Question::filter(['type' => 3, 'type' => 1])->get();
+		}
+
+		private function getWawancaraQuestions() {
+			return Question::whereRelation('type', 'name', 'Tes Wawancara')->get();
+		}
 
     public function index(Request $req)
     {

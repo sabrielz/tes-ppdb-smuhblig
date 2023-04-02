@@ -18,7 +18,8 @@
 									<i class="fa fa-search"></i>
 								</div>
 							</div>
-							<input type="text" name="siswa" class="form-control" placeholder="Kode Jurusan: X-000">
+							<input type="hidden" name="test" value="{{ request()->query('test') }}">
+							<input type="text" name="siswa" class="form-control" placeholder="Kode Jurusan: X-000" value="{{ request('siswa') ?? '' }}">
 							<div class="input-group-append">
 								<button type="submit" class="btn rounded-right btn-primary btn-flat">Pilih Siswa</button>
 							</div>

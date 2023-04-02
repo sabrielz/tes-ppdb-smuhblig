@@ -10,6 +10,11 @@ class Answer extends Model
 {
     use HasFactory, SoftDeletes;
 
+		protected $fillable = [
+			'student_id',
+			'question_id',
+			'answer'
+		];
 		protected $dates = ['deleted_at'];
 
 		public function question()
