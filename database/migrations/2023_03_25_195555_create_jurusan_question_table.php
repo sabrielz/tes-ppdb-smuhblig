@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
 						$table->foreignId('jurusan_id');
 						$table->foreignId('question_id');
-            $table->timestamps();
-						$table->dateTime('deleted_at')->nullable();
         });
     }
 

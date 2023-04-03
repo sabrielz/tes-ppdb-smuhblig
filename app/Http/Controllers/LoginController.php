@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -11,6 +12,27 @@ class LoginController extends Controller
     {
         return view('pages.login');
     }
+
+		public function login(Request $req)
+		{
+			$creden = $req->validate([
+				'username' => 'required',
+				'password' => 'required'
+			]);
+	
+			if(Auth::attempt($creden)) {
+				$req->session()->regenerate();
+				
+				return redirect('/dashboard')->with(alert([
+						[
+								'variant' => 'success',
+								'message' => 'Login berhasil.'
+						]
+				]));
+			}
+
+			return;
+		}
 
     public function logout()
     {

@@ -2,12 +2,13 @@
 
 @section('content')
 	<form action="" method="post">
+		@csrf
 		<div class="row">
 
 			@include('pages.dashboard.test.detailsiswa')
 
 			{{-- Butawarna Card --}}
-			<div class="col-12 card card-default">
+			{{-- <div class="col-12 card card-default">
 				<div class="card-header ">
 					<label for="" class="m-0">1. Butawarna</label>
 				</div>
@@ -67,9 +68,33 @@
 
 					</div>
 				</div>
-			</div>
+			</div> --}}
 
 			{{-- Tindik Card --}}
+			<div class="col-12 card card-default">
+				<div class="card-body">
+
+					{{-- Tindik Field Input --}}
+					<div class="row m-0">
+						<label for="" class="col-sm-3">1. Buta Warna</label>
+						<div class="form-group col-sm-9 m-0">
+							<div class="d-inline-block form-check mr-2">
+								<input name="tindik" id="tindikInputRadioAda" type="radio" class="form-check-input" value="ada">
+								<label for="tindikInputRadioAda" class="form-check-label">Iya</label>
+							</div>
+							<div class="d-inline-block form-check mr-2">
+								<input name="tindik" id="tindikInputRadioAda" type="radio" class="form-check-input" value="ada">
+								<label for="tindikInputRadioAda" class="form-check-label">Partial</label>
+							</div>
+							<div class="d-inline-block form-check">
+								<input name="tindik" id="tindikInputRadioTidak" type="radio" class="form-check-input" value="tidak">
+								<label for="tindikInputRadioTidak" class="form-check-label">Tidak</label>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
 			<div class="col-12 card card-default">
 				<div class="card-body">
 

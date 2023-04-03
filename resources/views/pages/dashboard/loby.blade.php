@@ -50,14 +50,14 @@
 			</div>
 			<div class="card-body p-0">
 
-				@if (is_null($siswa))
+				@if (!request('student'))
 					<p class="p-2 text-center">Belum ada siswa...</p>
 				@elseif (empty($siswa))
 					<p class="p-2 text-center">Siswa tidak ditemukan...</p>
 				@else
 					<table class="table">
 						<tbody>
-							<tr>
+							{{-- <tr>
 								<td>1.</td>
 								<td>Update software</td>
 								<td>
@@ -96,7 +96,14 @@
 									</div>
 								</td>
 								<td><span class="badge bg-success">90%</span></td>
-							</tr>
+							</tr> --}}
+							@foreach ($siswa as $name => $detail)
+								<tr>
+									<th>{{ Str::replace('_',' ', Str::title($name)) }}</th>
+									<td>:</td>
+									<td> {{ $detail }}</td>
+								</tr>
+							@endforeach
 						</tbody>
 					</table>
 				@endif

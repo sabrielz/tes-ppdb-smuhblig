@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             ConfigSeeder::class,
             QuestionSeeder::class,
             QuestionTypeSeeder::class,
+						QuestionJurusanSeeder::class,
         ]);
     }
 }

@@ -23,7 +23,7 @@
 								class="form-control"
 							></textarea>
 
-							@error('answer.answer')
+							@error('answer.' . $quest->id)
 								<p class="m-0 text-danger">
 									{{ $message }}
 								</p>

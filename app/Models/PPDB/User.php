@@ -64,4 +64,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Identitas::class, 'identitas_id', 'id');
     }
+
+		// public function jurusan()
+		// {
+		// 	return JurusanStudent::where('kode', $this->username)->get();
+		// }
 }

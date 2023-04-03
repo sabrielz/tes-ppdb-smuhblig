@@ -1,9 +1,11 @@
 <?php function getDetailSiswaTable ($siswa) :array {
-	$bio = \App\Models\PPDB\User::where('username', request('siswa'))->first();
+	$bio = \App\Models\PPDB\User::where('username', request('student'))->first();
 
 	$details = [];
 
 	$details['test_type'] = Str::title(request()->get('test'));
+	$details['jurusan'] = $bio->identitas->jurusan->nama;
+	$details['kode_pendaftaran'] = $bio->identitas->jurusan->kode;
 	$details['nama_lengkap'] = $bio->identitas->nama_lengkap;
 	$details['asal_sekolah'] = $bio->identitas->asal_sekolah;
 	$details['no_wa'] = $bio->identitas->no_wa_siswa;

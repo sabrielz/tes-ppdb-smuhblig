@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\GetStudent;
 use App\Models\Answer;
+use App\Models\PPDB\JurusanStudent;
 use App\Models\PPDB\User;
 use App\Models\Question;
 use Illuminate\Http\Request;
@@ -21,8 +22,15 @@ class TestController extends Controller
 
     private function getWawancaraQuestions()
     {
-        return Question::whereRelation('type', 'name', 'Tes Wawancara')->get();
+        return Question::whereRelation('type', 'name', 'Tes Wawancara')->whereRelation('jurusan', 'slug', $this->getJurusanStudentSlug())->get();
     }
+
+		private function getJurusanStudentSlug()
+		{
+			// $result = JurusanStudent::where('kode', request('student'))->first();
+			$student = $this->getStudent(request('student'));
+			return $student->identitas->jurusan->slug;
+		}
 
     private function getStudent(?string $username = null)
     {
@@ -47,7 +55,11 @@ class TestController extends Controller
 
             $creden = $req->validate([
                 'answer' => 'required|array',
-            ]);
+								'answer.*' => 'required'
+            ],
+						[
+							'answer.*.required' => 'The answer is required'
+						]);
             // dd($creden);
 
             $student = $this->getStudent($req->get('student'));

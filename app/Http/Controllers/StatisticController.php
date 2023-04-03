@@ -16,9 +16,9 @@ class StatisticController extends Controller
 
     public function index() :View
     {
-        dd($this->getWawancaraStatistic());
+        // dd($this->getWawancaraStatistic());
         return view('pages.dashboard.statistic', [
-            $students = $this->getWawancaraStatistic()
+            'students' => $this->getWawancaraStatistic()
         ]);
     }
 }

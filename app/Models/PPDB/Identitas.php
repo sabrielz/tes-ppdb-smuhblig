@@ -14,11 +14,16 @@ class Identitas extends Model
 
 		public function verifikasi()
 		{
-			return $this->hasOne(Verifikasi::class, 'id', 'identitas_id');
+			return $this->hasOne(Verifikasi::class, 'identitas_id');
 		}
 
 		public function user()
 		{
-			return $this->hasOne(User::class, 'id', 'identitas_id');
+			return $this->hasOne(User::class, 'identitas_id');
+		}
+
+		public function jurusan()
+		{
+			return $this->hasOne(JurusanStudent::class, 'identitas_id');
 		}
 }
