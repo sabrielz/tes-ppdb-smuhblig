@@ -11,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 /*
 |--------------------------------------------------------------------------
-| Database TES PPDB SMK																													
+| Database TES PPDB SMK
 |--------------------------------------------------------------------------
 */
 
@@ -19,9 +19,9 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-		protected $connection = 'mysql1';
-		protected $with = ['level', 'identitas'];
-		
+    protected $connection = 'mysql1';
+    protected $with = ['level', 'identitas'];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -29,11 +29,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-				'username',
+        'username',
         'password',
-				'avatar',
-				'identitas_id',
-				'level_id',
+        'avatar',
+        'identitas_id',
+        'level_id',
     ];
 
     /**
@@ -55,13 +55,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-		public function level()
-		{
-			return $this->belongsTo(UserLevel::class, 'level_id','id');
-		}
+    public function level()
+    {
+        return $this->belongsTo(UserLevel::class, 'level_id', 'id');
+    }
 
-		public function identitas()
-		{
-			return $this->belongsTo(Identitas::class, 'identitas_id', 'id');
-		}
+    public function identitas()
+    {
+        return $this->belongsTo(Identitas::class, 'identitas_id', 'id');
+    }
 }

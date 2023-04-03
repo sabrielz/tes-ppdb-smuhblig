@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\PPDB\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -24,11 +25,11 @@ class Answer extends Model
 
     public function question_type()
     {
-        return $this->hasOneThrough(QuestionType::class, Question::class);
+        return $this->hasOneThrough(QuestionType::class, Question::class, 'type_id', 'id');
     }
 
     public function student()
     {
-        return $this->belongsTo(Student::class, 'student_id', 'id');
+        return $this->belongsTo(User::class, 'student_id', 'id');
     }
 }
