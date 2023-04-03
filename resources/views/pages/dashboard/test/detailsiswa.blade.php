@@ -1,10 +1,12 @@
 <?php function getDetailSiswaTable ($siswa) :array {
+	$bio = \App\Models\PPDB\User::where('username', request('siswa'))->first();
+
 	$details = [];
 
 	$details['test_type'] = Str::title(request()->get('test'));
-	$details['nama_lengkap'] = 'M. Zaenal Abidin';
-	$details['asal_sekolah'] = 'Google Corporation';
-	$details['no_wa'] = '08123456789';
+	$details['nama_lengkap'] = $bio->identitas->nama_lengkap;
+	$details['asal_sekolah'] = $bio->identitas->asal_sekolah;
+	$details['no_wa'] = $bio->identitas->no_wa_siswa;
 
 	return $details;
 } ?>

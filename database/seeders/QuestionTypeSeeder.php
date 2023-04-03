@@ -16,12 +16,15 @@ class QuestionTypeSeeder extends Seeder
 				$payload = [
 					[
 						'name' => 'Tes Fisik',
+						'slug' => 'tes-fisik'
 					],
 					[
 						'name' => 'Tes Wawancara',
+						'slug' => 'tes-wawancara'
 					],
 					[
 						'name' => 'Tes Buta Warna',
+						'slug' => 'tes-buta-warna'
 					],
 				];
 
