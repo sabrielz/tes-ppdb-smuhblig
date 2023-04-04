@@ -17,7 +17,7 @@ class TestController extends Controller
     private function getFisikQuestions()
     {
         // return Question::whereRelation('type', 'name', 'Tes Buta Warna')->get();
-        return Question::filter(['type' => 3, 'type' => 1])->get();
+        return Question::filter(['type' => 1])->get();
     }
 
     private function getWawancaraQuestions()
@@ -52,13 +52,15 @@ class TestController extends Controller
     public function store(Request $req)
     {
         // try {
+					// dd($req->all());
 
             $creden = $req->validate([
                 'answer' => 'required|array',
 								'answer.*' => 'required'
             ],
 						[
-							'answer.*.required' => 'The answer is required'
+							'answer.*.required' => 'The answer is required',
+							'answer.required' => 'Please choose an answer'
 						]);
             // dd($creden);
 

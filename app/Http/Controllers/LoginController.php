@@ -24,6 +24,12 @@ class LoginController extends Controller
 		if (Auth::attempt($creden)) {
 			$req->session()->regenerate();
 
+			return redirect(route('dashboard.index'));
+		}
+
+		if (Auth::attempt($creden)) {
+			$req->session()->regenerate();
+
 			alert(['success' => 'Login berhasil.']);
 			return redirect(route('dashboard.index'));
 		}

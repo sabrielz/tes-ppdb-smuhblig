@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 class QuestionController extends Controller
 {
     private function getFisikQuestions () :Collection {
-        return Question::whereRelation('type', 'name', 'Tes Buta Warna')->get();
+        return Question::whereRelation('type', 'name', 'Tes Fisik')->get();
     }
 
     private function getWawancaraQuestions() :Collection {

@@ -16,6 +16,7 @@
 					</div>
 
 					<div class="card-body">
+						@if ($quest->pilgan == null)
 							<textarea type="text"
 								name="answer[{{ $quest->id }}]"
 								id="input-quest-{{ $quest->id }}"
@@ -28,6 +29,20 @@
 									{{ $message }}
 								</p>
 							@enderror
+						@else
+							<input type="hidden" name="answer[{{ $quest->id }}]" value="">
+							@foreach ($quest->pilgan as $key => $pilgan)
+								<div class="d-flex form-check mr-2">
+									<input name="answer[{{ $quest->id }}]" id="input-quest-{{ $quest->id }}-{{ $key }}" type="radio" class="form-check-input" value="{{ $key }}">
+									<label for="input-quest-{{ $quest->id }}-{{ $key }}" class="form-check-label">{{ Str::Title($pilgan) }}</label>
+								</div>
+							@endforeach
+							@error('answer.' . $quest->id)
+								<p class="m-0 text-danger">
+									{{ $message }}
+								</p>
+							@enderror
+						@endif
 					</div>
 				</div>
 			@endforeach

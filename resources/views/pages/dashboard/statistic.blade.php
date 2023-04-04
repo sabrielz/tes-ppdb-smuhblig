@@ -22,7 +22,11 @@
 								<td>{{ 'On Going' }}</td>
 								{{-- <td>{{  }}</td> --}}
 								<td></td>
-							</tr>
+						{{-- @foreach ($students as $key => $student)
+							<tr>
+								<td>{{ $loop->iteration }}</td>
+								<td>{{ $key }}</td>
+							</tr> --}}
 						@endforeach
 					</tbody>
 				</table>

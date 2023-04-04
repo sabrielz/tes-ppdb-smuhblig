@@ -17,7 +17,7 @@
 							<tr>
 								<td>{{ $loop->iteration }}</td>
 								<td>{{ $quest->question }}</td>
-								<td>{{ 'No field yet' }}</td>
+								<td>{{ $quest->pilgan[$quest->answer] ?? 'Tidak Ada Jawaban Default' }}</td>
 								<td>
 									<div class="btn-group btn-group-sm">
 										{{-- Button Edit --}}

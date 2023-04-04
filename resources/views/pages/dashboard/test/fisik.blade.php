@@ -70,73 +70,40 @@
 				</div>
 			</div> --}}
 
+			@foreach ($questions as $quest)
 			{{-- Tindik Card --}}
 			<div class="col-12 card card-default">
 				<div class="card-body">
 
 					{{-- Tindik Field Input --}}
 					<div class="row m-0">
-						<label for="" class="col-sm-3">1. Buta Warna</label>
+						<label for="" class="col-sm-3">{{ $loop->iteration . '. ' . $quest->question }}</label>
 						<div class="form-group col-sm-9 m-0">
-							<div class="d-inline-block form-check mr-2">
-								<input name="tindik" id="tindikInputRadioAda" type="radio" class="form-check-input" value="ada">
-								<label for="tindikInputRadioAda" class="form-check-label">Iya</label>
-							</div>
-							<div class="d-inline-block form-check mr-2">
+							@foreach ($quest->pilgan as $key => $pilgan)
+								<div class="d-inline-block form-check mr-2">
+									<input name="answer[{{ $quest->id }}]" id="input-quest-{{ $quest->id }}-{{ $key }}" type="radio" class="form-check-input" value="{{ $key }}">
+									<label for="input-quest-{{ $quest->id }}-{{ $key }}" class="form-check-label">{{ Str::Title($pilgan) }}</label>
+								</div>
+							@endforeach
+							{{-- <div class="d-inline-block form-check mr-2">
 								<input name="tindik" id="tindikInputRadioAda" type="radio" class="form-check-input" value="ada">
 								<label for="tindikInputRadioAda" class="form-check-label">Partial</label>
 							</div>
 							<div class="d-inline-block form-check">
 								<input name="tindik" id="tindikInputRadioTidak" type="radio" class="form-check-input" value="tidak">
 								<label for="tindikInputRadioTidak" class="form-check-label">Tidak</label>
-							</div>
+							</div> --}}
+							@error('answer')
+								<p class="m-0 text-danger">
+									{{ $message }}
+								</p>
+							@enderror
 						</div>
 					</div>
 
 				</div>
 			</div>
-			<div class="col-12 card card-default">
-				<div class="card-body">
-
-					{{-- Tindik Field Input --}}
-					<div class="row m-0">
-						<label for="" class="col-sm-3">2. Tindik</label>
-						<div class="form-group col-sm-9 m-0">
-							<div class="d-inline-block form-check mr-2">
-								<input name="tindik" id="tindikInputRadioAda" type="radio" class="form-check-input" value="ada">
-								<label for="tindikInputRadioAda" class="form-check-label">Ada</label>
-							</div>
-							<div class="d-inline-block form-check">
-								<input name="tindik" id="tindikInputRadioTidak" type="radio" class="form-check-input" value="tidak">
-								<label for="tindikInputRadioTidak" class="form-check-label">Tidak</label>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
-
-			{{-- Tato Card --}}
-			<div class="col-12 card card-default">
-				<div class="card-body">
-
-					{{-- Tato Field Input --}}
-					<div class="row m-0">
-						<label for="" class="col-sm-3">3. Tato</label>
-						<div class="form-group col-sm-9 m-0">
-							<div class="d-inline-block form-check mr-2">
-								<input name="tato" id="tatoInputRadioAda" type="radio" class="form-check-input" value="ada">
-								<label for="tatoInputRadioAda" class="form-check-label">Ada</label>
-							</div>
-							<div class="d-inline-block form-check">
-								<input name="tato" id="tatoInputRadioTidak" type="radio" class="form-check-input" value="tidak">
-								<label for="tatoInputRadioTidak" class="form-check-label">Tidak</label>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
+			@endforeach
 
 			<div class="col-12 text-center mb-4">
 				<button type="submit" class="btn btn-primary">

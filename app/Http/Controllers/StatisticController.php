@@ -10,13 +10,13 @@ use Illuminate\Support\Collection;
 
 class StatisticController extends Controller
 {
-    private function getWawancaraStatistic() {
+    private function getWawancaraStatistic() :Collection {
         // return Answer::whereRelation('question', 'type_id', 2)->with(['student', 'question'])->get()->groupBy('student');
 		return User::whereRelation('level', 'name', 'siswa')->with(['answers'])->paginate(15);
     }
 
-    private function getFisikStatistic() {
-        return $this->getWawancaraStatistic();
+    private function getFisikStatistic() :Collection {
+        return Answer::whereRelation('question', 'type_id', 1)->with(['student', 'question'])->get()->groupBy('student.name');
     }
 
     public function index(Request $req) :View

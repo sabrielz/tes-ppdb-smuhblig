@@ -13,6 +13,9 @@ class Question extends Model
 
     protected $connection = 'mysql';
     protected $dates = ['deleted_at'];
+		protected $casts = [
+			'pilgan' => 'array'
+		];
 
     public function getRouteKeyName() :string { return 'id'; }
 
