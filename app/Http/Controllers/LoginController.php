@@ -23,12 +23,7 @@ class LoginController extends Controller
 			if(Auth::attempt($creden)) {
 				$req->session()->regenerate();
 				
-				return redirect('/dashboard')->with(alert([
-						[
-								'variant' => 'success',
-								'message' => 'Login berhasil.'
-						]
-				]));
+				return redirect(route('dashboard.index'));
 			}
 
 			return;

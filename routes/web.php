@@ -39,10 +39,11 @@ Route::get('/', fn () => redirect( route('login.index') ))->name('index');
 Route::controller(LoginController::class)->middleware('guest')->group(function () {
     Route::get('/login', 'index')->name('login.index');
     Route::post('/login', 'login')->name('login.post');
-    Route::get('/logout', 'logout')->name('logout');
 });
 
-Route::prefix('/dashboard')->group(function () {
+Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
+
+Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/', 'index')->name('dashboard.index');
