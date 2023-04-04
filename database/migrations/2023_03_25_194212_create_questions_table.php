@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
 						$table->foreignId('type_id');
 						$table->text('question');
+						$table->json('pilgan')->nullable();
 						$table->integer('answer')->nullable();
             $table->timestamps();
 						$table->dateTime('deleted_at')->nullable();

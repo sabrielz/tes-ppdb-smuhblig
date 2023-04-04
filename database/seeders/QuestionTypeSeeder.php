@@ -22,10 +22,6 @@ class QuestionTypeSeeder extends Seeder
 						'name' => 'Tes Wawancara',
 						'slug' => 'tes-wawancara'
 					],
-					[
-						'name' => 'Tes Buta Warna',
-						'slug' => 'tes-buta-warna'
-					],
 				];
 
 				foreach ($payload as $value) {
