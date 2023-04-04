@@ -13,8 +13,11 @@
 						</tr>
 					</thead>
 					<tbody>
-						@foreach ($students as $student)
-
+						@foreach ($students as $key => $student)
+							<tr>
+								<td>{{ $loop->iteration }}</td>
+								<td>{{ $key }}</td>
+							</tr>
 						@endforeach
 					</tbody>
 				</table>
