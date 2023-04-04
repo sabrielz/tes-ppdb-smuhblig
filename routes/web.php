@@ -42,7 +42,7 @@ Route::controller(LoginController::class)->middleware('guest')->group(function (
     Route::get('/logout', 'logout')->name('logout');
 });
 
-Route::prefix('/dashboard')->group(function () {
+Route::prefix('/dashboard')->middleware(['auth'])->group(function () {
 
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/', 'index')->name('dashboard.index');

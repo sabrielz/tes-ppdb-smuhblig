@@ -75,6 +75,7 @@ class ConfigSeeder extends Seeder
                     '/' => [
                         'title' => 'Beranda'
                     ],
+                    'login' => ['title' => 'Login'],
                     'dashboard' => ['title' => 'Beranda'],
                     'dashboard/question' => ['title' => 'Kelola Soal'],
                     'dashboard/question/*/edit' => ['title' => 'Edit Soal'],

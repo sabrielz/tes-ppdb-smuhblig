@@ -15,15 +15,17 @@ if (!function_exists('is_active_link')) {
     }
 }
 
-if (!function_exists('set_alert')) {
+if (!function_exists('alert')) {
     function alert(null|array $value = null) :mixed {
         $result = null;
 
         if (is_null($value)) {
-            $result = request('alert');
+            $result = session()->pull('alert', []);
         } elseif (is_array($value)) {
-            $result = request(['alert' => $value]);
+            $result = session(['alert' => $value]);
         }
+
+		// session()->remove('alert');
 
         return $result;
     }
@@ -44,4 +46,13 @@ if (!function_exists('merge_url_with_params')) {
         if (strlen($queries) > 0) $result .= "?$queries";
         return $result;
     }
+}
+
+if (!function_exists('get_paginate_url')) {
+	function get_paginate_url(int $page) {
+		return request()->fullUrlWithQuery([
+			...request()->query->all(),
+			'page' => $page
+		]);
+	}
 }

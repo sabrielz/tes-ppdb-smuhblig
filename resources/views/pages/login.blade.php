@@ -24,12 +24,12 @@
 		</div>
 		<div class="row">
 			<div class="col-12">
-				<a href="{{ route('dashboard.index') }}" class="btn btn-primary btn-block">
+				{{-- <a href="{{ route('dashboard.index') }}" class="btn btn-primary btn-block">
 					Sign In <i class="fa fa-sign-in-alt"></i>
-				</a>
-				{{-- <button type="submit" class="btn btn-primary btn-block">
+				</a> --}}
+				<button type="submit" class="btn btn-primary btn-block">
 					Sign In <i class="fa fa-sign-in-alt"></i>
-				</button> --}}
+				</button>
 			</div>
 			<!-- /.col -->
 		</div>

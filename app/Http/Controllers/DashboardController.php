@@ -9,6 +9,7 @@ class DashboardController extends Controller
 
     public function index()
     {
+		alert(['success' => 'example']);
         return view('pages.dashboard.index');
     }
 

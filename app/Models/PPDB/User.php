@@ -3,6 +3,8 @@
 namespace App\Models\PPDB;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Models\Answer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -69,4 +71,13 @@ class User extends Authenticatable
 		// {
 		// 	return JurusanStudent::where('kode', $this->username)->get();
 		// }
+	public function answers()
+	{
+		return $this->setConnection('mysql')->hasMany(Answer::class, 'student_id', 'id');
+	}
+
+	// public function jurusan()
+	// {
+	// 	return $this->hasOneThrough(Jurusan::class, Identitas::class, 'identitas_id');
+	// }
 }
