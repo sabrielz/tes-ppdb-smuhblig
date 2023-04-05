@@ -5,6 +5,7 @@ namespace App\Models\PPDB;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Models\Answer;
+use App\Models\Status;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -22,7 +23,7 @@ class User extends Authenticatable
 	use HasApiTokens, HasFactory, Notifiable;
 
 	protected $connection = 'mysql1';
-	protected $with = ['level', 'identitas'];
+	protected $with = ['level', 'identitas', 'status'];
 
 	/**
 	 * The attributes that are mass assignable.
@@ -75,6 +76,10 @@ class User extends Authenticatable
 	public function answers()
 	{
 		return $this->setConnection('mysql')->hasMany(Answer::class, 'student_id', 'id');
+	}
+
+	public function status () {
+		return $this->setConnection('mysql')->hasOne(Status::class, 'student_id', 'id');
 	}
 
 }

@@ -83,7 +83,12 @@ class ConfigSeeder extends Seeder
                     'dashboard/test' => ['title' => 'Ruang Tes'],
                     'dashboard/statistic' => ['title' => 'Kelola Data'],
                 ])
-            ]
+			],
+			[
+				'name' => 'Status Type References',
+				'key' => 'status_type_refs',
+				'value' => json_encode(config('references.status_types'))
+			]
         ]);
     }
 }
