@@ -33,7 +33,7 @@
 
 				<div class="col-12 mt-3">
 					<a href="{{ route('dashboard.test.index') . '?' . request()->getQueryString() }}"
-						class="d-block btn btn-success mx-auto {{ (isset($siswa) && !empty($siswa)) ? '' : 'disabled' }}">
+						class="d-block btn btn-success mx-auto {{ ((isset($siswa) and !empty($siswa)) and ($allow_test ?? null)) ? '' : 'disabled' }}">
 						Mulai Tes {{ Str::title( request()->query('test') ) }}
 					</a>
 				</div>

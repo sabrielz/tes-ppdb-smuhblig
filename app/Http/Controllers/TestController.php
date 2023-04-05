@@ -46,7 +46,7 @@ class TestController extends Controller
 		$resolver = 'get' . ucfirst($test) . 'Questions';
 		$questions = $this->$resolver();
 
-		return view("pages.dashboard.test.$test", [
+		return view("pages.dashboard.test.form", [
 			'questions' => $questions
 		]);
 	}
