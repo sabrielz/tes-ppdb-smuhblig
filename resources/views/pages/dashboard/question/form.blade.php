@@ -1,8 +1,25 @@
 @extends('layouts.dashboard')
 
+<?php
+	if (!isset($question) or empty($question)) {
+		$question = collect([
+			'id' => null,
+			'question' => null,
+			'answer' => null,
+		]);
+	}
+	$method ??= 'create';
+
+	$action; $submethod;
+	dd($question->get('slug'));
+	if ($method === 'edit') { $action = route('dashboard.question.update', ['question' => $question->get('id')]); }
+	elseif ($method === 'create') { $action = route('dashboard.question.create'); }
+
+?>
+
 @section('content')
 
-	<form action="{{ route('dashboard.question.update', ['question' => $question->id]) }}" method="post"> @csrf
+	<form action="{{ $action }}" method="post"> @csrf
 		<div class="row">
 
 			<div class="col-12 card card-default">
@@ -12,9 +29,10 @@
 				<div class="card-body">
 					<select name="test" id="" class="form-control">
 						<option value="">-- Pilih Tipe Tes --</option>
-						@foreach (['wawancara', 'butawarna'] as $type)
-							<?php $selected = old('test') === $type ?>
-							<option @selected(true) value="{{ $type }}">{{ Str::title($type) }}</option>
+
+						@foreach ($question_types as $type)
+							<?php $selected = old('test') === $type->slug ?>
+							<option @selected($selected) value="{{ $type->id }}">{{ $type->name }}</option>
 						@endforeach
 					</select>
 				</div>
@@ -30,7 +48,7 @@
 						id=""
 						class="form-control"
 						placeholder="Masukkan pertanyaan..."
-						> {{ old('question') ?? $question->question ?? null }} </textarea>
+						> {{ old('question') ?? $question->get('question') ?? null }} </textarea>
 				</div>
 			</div>
 
@@ -44,7 +62,7 @@
 						id=""
 						class="form-control"
 						placeholder="(Opsional) Masukkan jawaban..."
-					> {{ old('answer') ?? $question->answer ?? null }} </textarea>
+					> {{ old('answer') ?? $question->get('answer') ?? null }} </textarea>
 				</div>
 			</div>
 

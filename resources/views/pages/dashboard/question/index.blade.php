@@ -3,6 +3,12 @@
 @section('content')
 	<div class="row">
 
+		<div class="col-12 text-md-left text-center my-2">
+			<a href="{{ route('dashboard.question.create') }}" class="btn btn-primary btn-sm">
+				<i class="fa fa-plus"></i> Tambah Soal
+			</a>
+		</div>
+
 		<div class="col-12 card card-default">
 			<div class="card-body p-1">
 				<table class="table table-hovered table-striped w-100">

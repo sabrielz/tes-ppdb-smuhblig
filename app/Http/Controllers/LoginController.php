@@ -34,6 +34,7 @@ class LoginController extends Controller
 			return redirect(route('dashboard.index'));
 		}
 
+		alert(['error' => 'Maaf, username dan password tidak terdaftar.']);
 		return back();
 	}
 

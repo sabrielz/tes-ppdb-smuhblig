@@ -8,12 +8,14 @@ use Illuminate\View\Component;
 
 class Alert extends Component
 {
+	public array $alerts;
+
     /**
      * Create a new component instance.
      */
     public function __construct()
     {
-        //
+        $this->alerts = alert();
     }
 
     /**
@@ -21,6 +23,8 @@ class Alert extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.dashboard.alert');
+        return view('components.dashboard.alert', [
+			'alerts' => $this->alerts
+		]);
     }
 }

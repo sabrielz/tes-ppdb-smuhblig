@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\QuestionType;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,6 +20,15 @@ class QuestionController extends Controller
         return Question::whereRelation('type', 'name', 'Tes Wawancara')->get();
     }
 
+	private function getQuestionFormPreload ()
+	{
+		$question_types = QuestionType::all();
+
+		return [
+			'question_types' => $question_types
+		];
+	}
+
     public function index(Request $req) :View
     {
         $test = $req->get('test');
@@ -26,14 +36,23 @@ class QuestionController extends Controller
         $question = $this->$method_name();
 
         return view("pages.dashboard.question.index", [
-            'questions' => $question
+            'questions' => $question,
         ]);
     }
 
+	public function create (Request $req) :View
+	{
+		return view('pages.dashboard.question.form', [
+			...$this->getQuestionFormPreload()
+		]);
+	}
+
     public function edit (Question $question) :View
     {
-        return view('pages.dashboard.question.edit', [
-            'question' => $question
+        return view('pages.dashboard.question.form', [
+            'question' => $question,
+			'method' => 'edit',
+			...$this->getQuestionFormPreload()
         ]);
     }
 

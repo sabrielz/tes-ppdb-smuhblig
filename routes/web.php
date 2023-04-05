@@ -41,13 +41,9 @@ Route::controller(LoginController::class)->middleware('guest')->group(function (
     Route::post('/login', 'login')->name('login.post');
 });
 
-<<<<<<< HEAD
-Route::prefix('/dashboard')->middleware(['auth'])->group(function () {
-=======
 Route::get('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
 
 Route::prefix('/dashboard')->middleware('auth')->group(function () {
->>>>>>> ce67e3fe232f2423e1ba248cf176f169c55c0bea
 
     Route::controller(DashboardController::class)->group(function () {
         Route::get('/', 'index')->name('dashboard.index');
@@ -64,6 +60,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
     Route::controller(QuestionController::class)->group(function () {
         Route::get('/question', 'index')->middleware(['test'])->name('dashboard.question.index');
+        Route::get('/question/create', 'create')->name('dashboard.question.create');
         Route::get('/question/{question}/edit', 'edit')->name('dashboard.question.edit');
         Route::post('/question/{question}', 'update')->name('dashboard.question.update');
         Route::get('/question/{question}/delete', 'delete')->name('dashboard.question.delete');
@@ -71,6 +68,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
     Route::controller(StatisticController::class)->middleware(['test'])->group(function () {
         Route::get('/statistic', 'index')->name('dashboard.statistic.index');
+        Route::get('/statistic/detail', 'detail')->name('dashboard.statistic.detail');
     });
 
 });
