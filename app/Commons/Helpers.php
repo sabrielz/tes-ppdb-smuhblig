@@ -56,3 +56,38 @@ if (!function_exists('get_paginate_url')) {
 		]);
 	}
 }
+
+if (!function_exists('to_tanggal')) {
+	function to_tanggal($tanggal = null) {
+		return date('d-m-Y', $tanggal);
+	}
+}
+
+if (!function_exists('format_tanggal')) {
+	function format_tanggal($tanggal = null) {
+		$date = new DateTime($tanggal);
+		return date_format($date, 'd/m/Y');
+	}
+}
+
+if (!function_exists('format_full_tanggal')) {
+	function format_full_tanggal($tanggal = null) {
+		$date = new DateTime($tanggal);
+		return date_format($date, 'D F Y');
+	}
+}
+
+if (!function_exists('recollect')) {
+	function recollect(?array $array = null) {
+		if (is_null($array)) return collect();
+
+		foreach ($array as $key => $val) {
+			if (is_array($val)) {
+				$val = recollect($val);
+				$array[$key] = $val;
+			}
+		}
+
+		return collect($array);
+	}
+}
