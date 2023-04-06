@@ -61,6 +61,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::controller(QuestionController::class)->group(function () {
         Route::get('/question', 'index')->middleware(['test'])->name('dashboard.question.index');
         Route::get('/question/create', 'create')->name('dashboard.question.create');
+				Route::post('/question/create', 'store')->name('dashboard.question.store');
         Route::get('/question/{question}/edit', 'edit')->name('dashboard.question.edit');
         Route::post('/question/{question}', 'update')->name('dashboard.question.update');
         Route::get('/question/{question}/delete', 'delete')->name('dashboard.question.delete');

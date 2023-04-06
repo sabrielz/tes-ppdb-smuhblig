@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PPDB\Jurusan;
 use App\Models\Question;
 use App\Models\QuestionType;
 use Illuminate\Contracts\View\View;
@@ -34,6 +35,7 @@ class QuestionController extends Controller
         $test = $req->get('test');
         $method_name = 'get' . ucfirst($test) . 'Questions';
         $question = $this->$method_name();
+				// dd($question);
 
         return view("pages.dashboard.question.index", [
             'questions' => $question,
@@ -43,28 +45,88 @@ class QuestionController extends Controller
 	public function create (Request $req) :View
 	{
 		return view('pages.dashboard.question.form', [
-			...$this->getQuestionFormPreload()
+			...$this->getQuestionFormPreload(),
+			'jurusan' => Jurusan::all()
 		]);
+	}
+
+	public function store(Request $req)
+	{
+		// dd($req->all());
+
+		$validData = $req->validate([
+			'test' => 'required',
+			'jurusan' => 'required',
+			'question' => 'required'
+		]);
+
+		$payload = [
+			'type_id' => $validData['test'],
+			'question' => $validData['question']
+		];
+
+		if($req->pilgan) {
+			$payload['pilgan'] = $req->pilgan;
+		}
+
+		if($req->answer) {
+			$payload['answer'] = $req->answer;
+		}
+
+		$quest = Question::create($payload);
+
+		$quest->jurusan()->attach($validData['jurusan']);
+
+		alert(['success' => 'Berhasil menambah data.']);
+		return redirect()->route('dashboard.question.index', ['test' => $req->get('test')]);
 	}
 
     public function edit (Question $question) :View
     {
+			// dd($question->type->slug);
         return view('pages.dashboard.question.form', [
             'question' => $question,
 			'method' => 'edit',
+			'jurusan' => Jurusan::all(),
 			...$this->getQuestionFormPreload()
         ]);
     }
 
     public function update (Request $req, Question $question) :RedirectResponse
     {
+			// dd($req->all());
         // update question
-        return redirect()->route('dashboard.question.index', ['test' => 'wawancara']);
+				$validData = $req->validate([
+					'test' => 'required',
+					'jurusan' => 'required',
+					'question' => 'required'
+				]);
+		
+				$payload = [
+					'type_id' => $validData['test'],
+					'question' => $validData['question']
+				];
+		
+				if($req->pilgan) {
+					$payload['pilgan'] = $req->pilgan;
+				}
+		
+				if($req->answer) {
+					$payload['answer'] = $req->answer;
+				}
+		
+				$question->update($payload);
+		
+				$question->jurusan()->sync($validData['jurusan']);
+		
+				alert(['success' => 'Berhasil mengubah data.']);
+        return redirect()->route('dashboard.question.index', ['test' => $req->get('test')]);
     }
 
     public function delete (Question $question) :RedirectResponse
     {
         try {
+						// $question->jurusan()->detach();
             $question->delete();
             alert(['success' => 'Berhasil menghapus data.']);
             return redirect()->route('dashboard.question.index', ['test' => 'wawancara']);

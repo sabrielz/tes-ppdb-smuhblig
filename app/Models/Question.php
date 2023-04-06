@@ -11,6 +11,12 @@ class Question extends Model
     use SoftDeletes;
     use HasFactory;
 
+		protected $fillable = [
+			'type_id',
+			'question',
+			'answer',
+			'pilgan'
+		];
     protected $connection = 'mysql';
     protected $dates = ['deleted_at'];
 		protected $casts = [

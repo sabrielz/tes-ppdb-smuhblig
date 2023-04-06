@@ -26,7 +26,7 @@ class RoomController extends Controller
 	public function index(Request $req)
 	{
 		$kode_jurusan = strtoupper(request()->query('student'));
-		$test_type = $req->query('test');
+		$test_type = 'tes_' . $req->query('test');
 		$allow = true;
 
 		$bio = User::where('username', $kode_jurusan)->first();
@@ -36,9 +36,9 @@ class RoomController extends Controller
 
 		} else {
 			$result = recollect($this->isBio($bio));
-			if ($bio->status && $bio->status->get("tes_$test_type")) {
+			if ($bio->status && $bio->status->$test_type) {
 				$allow = false;
-				alert(['warning' => "Siswa sudah melakukan tes $test_type."]);
+				alert(['warning' => "Siswa sudah melakukan tes ". request('test') ]);
 			}
 		}
 
