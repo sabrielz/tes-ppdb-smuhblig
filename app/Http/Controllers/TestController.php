@@ -18,8 +18,8 @@ class TestController extends Controller
 {
 	private function getFisikQuestions()
 	{
-		// return Question::whereRelation('type', 'name', 'Tes Buta Warna')->get();
-		return Question::filter(['type' => 1])->get();
+		return Question::whereRelation('type', 'name', 'Tes Fisik')->whereRelation('jurusan', 'slug', $this->getJurusanStudentSlug())->get();
+		// return Question::filter(['type' => 1])->whereRelation('jurusan', 'slug', $this->getJurusanStudentSlug())->get();
 	}
 
 	private function getWawancaraQuestions()
