@@ -43,25 +43,24 @@
 					<label for="">Jurusan</label>
 				</div>
 				<div class="card-body">
+					{{-- @dd($jurusan) --}}
 					@foreach ($jurusan as $jrs)
 						<div class="d-flex form-check mr-2">
 							<?php 
 								$name = 'jurusan[' . $loop->index . ']';
 								$selected = old($name);
 								if ($question->jurusan) {
-									foreach ($jurusan as $jrs) {
-										$result = $question->jurusan->filter( function($j) use ($jrs, &$selected) {
-											$selected = true;
-											return $jrs->id == $j->id;
-										});
+									$result = $question->jurusan->contains($jrs->id);
+									if($result) {
+										$selected = true;
 									}
 								}
 							?>
-							<input name="jurusan[]" id="{{ $jrs->slug }}" type="checkbox" class="form-check-input" value="{{ $jrs->id }}">
+							<input name="jurusan[]" id="{{ $jrs->slug }}" type="checkbox" class="form-check-input" value="{{ $jrs->id }}" @checked($selected)>
 							<label for="{{ $jrs->slug }}" class="form-check-label">{{ $jrs->nama }}</label>
 						</div>
 					@endforeach
-				</div>2
+				</div>
 			</div>
 
 			<div class="col-12 card card-default">

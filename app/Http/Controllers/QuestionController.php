@@ -78,7 +78,7 @@ class QuestionController extends Controller
 		$quest->jurusan()->attach($validData['jurusan']);
 
 		alert(['success' => 'Berhasil menambah data.']);
-		return redirect()->route('dashboard.question.index', ['test' => $req->get('test')]);
+		return redirect()->route('dashboard.question.index', ['test' => substr($quest->type->slug, 4)]);
 	}
 
     public function edit (Question $question) :View
@@ -120,7 +120,7 @@ class QuestionController extends Controller
 				$question->jurusan()->sync($validData['jurusan']);
 		
 				alert(['success' => 'Berhasil mengubah data.']);
-        return redirect()->route('dashboard.question.index', ['test' => $req->get('test')]);
+        return redirect()->route('dashboard.question.index', ['test' => substr($question->type->slug, 4)]);
     }
 
     public function delete (Question $question) :RedirectResponse
