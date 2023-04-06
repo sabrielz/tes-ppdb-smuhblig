@@ -42,10 +42,10 @@ class StatisticController extends Controller
 	public function detail(Request $req) :View
 	{
 		$test = $req->query('test');
-		$identitas_id = $req->query('id');
+		$user_id = $req->query('id');
 
 		$abort = !in_array($test, ['wawancara', 'fisik', 'detail']);
-		$abort = $abort or is_null($identitas_id) or empty($identitas_id);
+		$abort = $abort or is_null($user_id) or empty($user_id);
 		if ($abort) return redirect()->route('dashboard.statistic.index', ['test' => $test]);
 
 		return view('pages.dashboard.statistic.detail', [

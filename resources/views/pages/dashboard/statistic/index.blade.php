@@ -4,7 +4,7 @@
 	<div class="row">
 
 		<div class="col-12 card card-default">
-			<div class="card-body">
+			<div class="card-body p-0">
 				<table class="table">
 					<thead>
 						<tr>
@@ -24,19 +24,28 @@
 								<td>{{ $loop->iteration }}</td>
 								<td>{{ $student->get('identitas')->get('nama_lengkap') }}</td>
 								<td>{{ format_tanggal($student->get('identitas')->get('tanggal_lahir')) }}</td>
-								<td></td>
-								<td></td>
+
+								{{-- Test Status --}}
+								<td class="text-{{ $student->get('status')->get('tes_wawancara') ? 'success' : 'danger' }}">
+									{{ $student->get('status')->get('tes_wawancara') ? 'Sudah' : 'Belum' }}
+								</td>
+								<td class="text-{{ $student->get('status')->get('tes_fisik') ? 'success' : 'danger' }}">
+									{{ $student->get('status')->get('tes_fisik') ? 'Sudah' : 'Belum' }}
+								</td>
+
 								<td>
 									<div class="btn-group btn-group-sm">
 
 										{{-- Detail --}}
 										<button type="button" class="btn btn-info btn-action" title="Detail Siswa"
-											data-toggle="modal" data-target="#modal-detail-siswa" data-id="{{ $student->get('identitas')->get('id') }}">
+											data-toggle="modal" data-target="#modal-detail-siswa"
+											data-id="{{ $student->get('id') }}">
+											{{-- onclick="ajaxStudentDetail(this)"> --}}
 											<i class="fa fa-info"></i>
 										</button>
 
 										<?php $payloads = [
-											'id' => $student->get('identitas')->get('id'),
+											'id' => $student->get('id'),
 											'test' => request()->query('test')
 										] ?>
 
