@@ -11,8 +11,8 @@
 				</button>
 			</div>
 
-			<div class="modal-body"> {{-- Modal Body Content --}}
-
+			<div id="detail-body" class="modal-body"> {{-- Modal Body Content --}}
+				
 			</div>
 
 			<div class="modal-footer justify-content-between"> {{-- Modal Footer --}}
