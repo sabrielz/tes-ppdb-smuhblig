@@ -24,6 +24,13 @@ class User extends Authenticatable
 
 	protected $connection = 'mysql1';
 	protected $with = ['level', 'identitas', 'status'];
+protected $table = 'users';
+
+	public function __construct(array $attributes = [])
+		{
+				$this->table = env('DB_DATABASE1').'.'.$this->table;
+				parent::__construct();
+		}
 
 	/**
 	 * The attributes that are mass assignable.

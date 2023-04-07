@@ -18,6 +18,8 @@ class Answer extends Model
     ];
     protected $dates = ['deleted_at'];
 
+		protected $with = ['question'];
+
     public function question()
     {
         return $this->belongsTo(Question::class, 'question_id', 'id');
@@ -32,4 +34,23 @@ class Answer extends Model
     {
         return $this->belongsTo(User::class, 'student_id', 'id');
     }
+
+		public function scopeFilter($query, array $filters)
+		{
+			$query->when($filters['name'] ?? false, function($query, $name) {
+				if($name == 'asc') {
+					return $query->orderBy('student.nama_lengkap', 'asc');
+				} else if($name == 'desc') {
+					return $query->orderBy('student.nama_lengkap', 'desc');
+				}
+			});
+
+			$query->when($filters['lahir'] ?? false, function($query, $lahir) {
+				if($lahir == 'asc') {
+					return $query->orderBy('student.tanggal_lahir', 'asc');
+				} else if($lahir == 'desc') {
+					return $query->orderBy('student.tanggal_lahir', 'desc');
+				}
+			});
+		}
 }

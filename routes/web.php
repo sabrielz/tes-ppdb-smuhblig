@@ -30,7 +30,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/tes', function() {
 // 	// dd(\App\Models\Question::with('jurusan')->get());
 //     dd(\App\Models\Config::getConfig('metadata', []));
-		dd(\App\Models\Question::whereRelation('jurusan', 'nama', 'Teknik Komputer dan Jaringan')->get());
+		// dd(\App\Models\Question::whereRelation('jurusan', 'nama', 'Teknik Komputer dan Jaringan')->get());
+		dd(\App\Models\PPDB\Identitas::whereHas('jenis_kelamin')->with('jenis_kelamin')->limit(5)->get());
 
 });
 

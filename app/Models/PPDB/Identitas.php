@@ -11,6 +11,7 @@ class Identitas extends Model
 
 	protected $connection = 'mysql1';
 	protected $table = 'identitas';
+	protected $with = ['jenis_kelamin'];
 
 	public function verifikasi()
 	{
@@ -25,6 +26,11 @@ class Identitas extends Model
 	public function jurusan()
 	{
 		return $this->hasOne(JurusanStudent::class, 'identitas_id');
+	}
+
+	public function jenis_kelamin()
+	{
+		return $this->belongsTo(JenisKelamin::class);
 	}
 
 }

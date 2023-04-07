@@ -12,16 +12,24 @@ use Illuminate\Support\Collection;
 class StatisticController extends Controller
 {
     private function getWawancaraStatistic() {
-		$result = Answer::whereRelation('question', 'type_id', 2)->with(['student', 'question'])->paginate(15);
-		$result->setCollection($result->groupBy('student'));
-		return $result;
+			$result = Answer::whereRelation('question', 'type_id', 2)->with(['student', 'question'])->paginate(15);
+			$result->setCollection($result->groupBy('student'));
+			return $result;
     }
 
     private function getFisikStatistic() {
         $result = Answer::whereRelation('question', 'type_id', 1)->with(['student', 'question'])->paginate(15);
-		$result->setCollection($result->groupBy('student'));
-		return $result;
+				$result->setCollection($result->groupBy('student'));
+				return $result;
     }
+
+		private function getFisikStudentAnswer($id) {
+			return Answer::whereRelation('student', 'username', $id)->whereRelation('question', 'type_id', 1)->get();
+		}
+
+		private function getWawancaraStudentAnswer($id) {
+			return Answer::whereRelation('student', 'username', $id)->whereRelation('question', 'type_id', 2)->get();
+		}
 
     public function index(Request $req) :View
     {
@@ -42,14 +50,19 @@ class StatisticController extends Controller
 	public function detail(Request $req) :View
 	{
 		$test = $req->query('test');
-		$identitas_id = $req->query('id');
+		$id = $req->query('student');
+		$method_name = 'get' . ucfirst($test) . 'StudentAnswer';
+		$data = $this->$method_name($id);
+		// dd($data);
+		// $test = $req->query('test');
+		// $identitas_id = $req->query('id');
 
-		$abort = !in_array($test, ['wawancara', 'fisik', 'detail']);
-		$abort = $abort or is_null($identitas_id) or empty($identitas_id);
-		if ($abort) return redirect()->route('dashboard.statistic.index', ['test' => $test]);
+		// $abort = !in_array($test, ['wawancara', 'fisik', 'detail']);
+		// $abort = $abort or is_null($identitas_id) or empty($identitas_id);
+		// if ($abort) return redirect()->route('dashboard.statistic.index', ['test' => $test]);
 
 		return view('pages.dashboard.statistic.detail', [
-
+			'questions' => $data
 		]);
 	}
 }
