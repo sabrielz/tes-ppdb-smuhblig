@@ -29,19 +29,20 @@ class RoomController extends Controller
 		$test_type = 'tes_' . $req->query('test');
 		$allow = true;
 
-		$bio = User::where('username', $kode_jurusan)->first();
-		if (!$bio) {
-			$allow = false;
-			alert(['warning' => "Maaf, siswa tidak ditemukan."]);
+		if ($kode_jurusan) {
+			$bio = User::where('username', $kode_jurusan)->first();
 
-		} else {
-			$result = recollect($this->isBio($bio));
-			if ($bio->status && $bio->status->$test_type) {
+			if (!$bio) {
 				$allow = false;
-				alert(['warning' => "Siswa sudah melakukan tes ". request('test') ]);
+				alert(['warning' => "Maaf, siswa tidak ditemukan."]);
+			} else {
+				$result = recollect($this->isBio($bio));
+				if ($bio->status && $bio->status->$test_type) {
+					$allow = false;
+					alert(['warning' => "Siswa sudah melakukan tes ". request('test') ]);
+				}
 			}
 		}
-
 
 		return view('pages.dashboard.loby', [
 			'siswa' => $result ?? null,

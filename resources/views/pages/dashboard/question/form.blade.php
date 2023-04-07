@@ -46,10 +46,10 @@
 					{{-- @dd($jurusan) --}}
 					@foreach ($jurusan as $jrs)
 						<div class="d-flex form-check mr-2">
-							<?php 
+							<?php
 								$name = 'jurusan[' . $loop->index . ']';
 								$selected = old($name);
-								if ($question->jurusan) {
+								if ($question->get('jurusan')) {
 									$result = $question->jurusan->contains($jrs->id);
 									if($result) {
 										$selected = true;
@@ -73,7 +73,7 @@
 						id=""
 						class="form-control"
 						placeholder="Masukkan pertanyaan..."
-						>{{ old('question') ?? isset($question->question) ? $question->question : null }}</textarea>
+						>{{ old('question') ?? $question->get('question') ? $question->question : null }}</textarea>
 				</div>
 			</div>
 
@@ -88,9 +88,9 @@
 						class="form-control"
 						placeholder="(Opsional) Masukkan jawaban..."
 					> {{ old('answer') ?? $question->get('answer') ?? null }} </textarea> --}}
-					@if (isset($question->pilgan) || !empty($question->pilgan))
+					@if ($question->get('pilgan') || !empty($question->get('pilgan')))
 						<div id="pilihan-col">
-							@foreach ($question->pilgan as $pilgan)
+							@foreach ($question->get('pilgan') as $pilgan)
 								{{-- <input name="pilgan[{{ $loop->iteration }}]" type="text" class="form-control mb-2" placeholder="(Opsional) Pilihan {{ $loop->iteration }}" value="{{ $pilgan }}"> --}}
 								<div class="input-group input-group-sm mb-2">
 									<input name="pilgan[{{ $loop->iteration }}]" type="text" class="form-control" value="{{ $pilgan }}">
@@ -120,7 +120,7 @@
 			@push('html_scripts')
 				<script>
 					const container = document.getElementById('pilihan-col');
-					var inputCount = {{ isset($question->pilgan) ? count($question->pilgan) : 1 }};
+					var inputCount = {{ $question->get('pilgan') ? count($question->pilgan) : 1 }};
 					const addCol = () => {
 						inputCount++;
 						if(inputCount > 5){
@@ -135,8 +135,8 @@
 						newInput.placeholder = '(Opsional) Pilihan ' + inputCount;
 						newInput.name = 'pilgan['+ inputCount +']'
 						// input.className = 'form-control mb-2'
-						
-						container.append(newInputGroup);   
+
+						container.append(newInputGroup);
 					}
 
 					const removeCol = (e) => {
@@ -169,7 +169,7 @@
 						id=""
 						class="form-control"
 						placeholder="(Opsional) Masukkan jawaban... / Nomor Pilihan yang benar"
-					>{{ old('answer') ?? $question->answer ?? null }}</textarea>
+					>{{ old('answer') ?? $question->get('answer') ?? null }}</textarea>
 				</div>
 			</div>
 

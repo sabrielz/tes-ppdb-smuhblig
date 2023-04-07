@@ -39,6 +39,10 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="card card-default">
+
+		</div>
 	</div>
 
 	<div class="col-md-6">
