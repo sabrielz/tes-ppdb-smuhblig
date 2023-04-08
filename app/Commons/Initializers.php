@@ -33,3 +33,35 @@ if (!function_exists('init_breadcrumb')) {
         // }
     }
 }
+
+if (! function_exists('init_input')) {
+	function init_input(array $input): array {
+		$icon = $input['icon'] ??= null;
+		$type = $input['type'] ??= 'text';
+		$variant = $input['variant'] ??= 'default';
+		$name = $input['name'] ??= null;
+		$value = $input['value'] ??= request($input['name']) ?? old($input['name']);
+		$desc = $input['desc'] ??= null;
+		$label = $input['label'] ??= null;
+		$id = $input['id'] ??= $name;
+		$placeholder = $input['placeholder'] ??= null;
+		$selected = $input['selected'] ??= false;
+		$attrs = $input['attrs'] ??= [];
+		$opts = $input['opts'] ??= [];
+
+		return array_replace_recursive($input, [
+			'icon' => $icon,
+			'type' => $type,
+			'variant' => $variant,
+			'name' => $name,
+			'desc' => $desc,
+			'value' => $value,
+			'label' => $label,
+			'id' => $id,
+			'placeholder' => $placeholder,
+			'selected' => $selected,
+			'attrs' => $attrs,
+			'opts' => $opts,
+		]);
+	}
+}

@@ -12,7 +12,7 @@
 			</div>
 
 			<div id="detail-body" class="modal-body"> {{-- Modal Body Content --}}
-				
+
 			</div>
 
 			<div class="modal-footer justify-content-between"> {{-- Modal Footer --}}
@@ -22,26 +22,3 @@
 		</div>
 	</div>
 </div>
-
-@push('html_scripts')
-	<script>
-		$('#modal-detail-siswa').change(function () {
-			console.log('changed')
-			// function ajaxStudentDetail (elem) {
-			// 	elem = $(elem)
-			// 	let user_id = elem.data('id')
-			// 	$.ajax({
-			// 		url: "{{ route('api.student.detail') }}",
-			// 		type: 'GET',
-			// 		data: { user_id },
-			// 		success: function (res) {
-			// 			console.log(res)
-			// 		},
-			// 		error: function (err) {
-			// 			console.log(err)
-			// 		}
-			// 	})
-			// }
-		})
-	</script>
-@endpush

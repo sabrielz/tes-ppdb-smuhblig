@@ -91,3 +91,20 @@ if (!function_exists('recollect')) {
 		return collect($array);
 	}
 }
+
+// if (!function_exists('filled')) {
+// 	function filled(mixed $var) {
+// 		if (empty($var) or is_null($var) or is_)
+// 		if (is_array($var))
+// 	}
+// }
+
+if (! function_exists('array_get')) {
+	function array_get(array $array, string ...$property) {
+		foreach ($property as $key) {
+			$array = $array[$key] ?? null;
+			if (is_null($array)) break;
+		}
+		return $array;
+	}
+}

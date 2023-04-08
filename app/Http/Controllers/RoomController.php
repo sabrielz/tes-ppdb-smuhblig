@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PPDB\User;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -16,6 +17,7 @@ class RoomController extends Controller
 			$details['jurusan'] = Str::upper($bio->identitas->jurusan->nama);
 			$details['kode_pendaftaran'] = $bio->identitas->jurusan->kode;
 			$details['nama_lengkap'] = $bio->identitas->nama_lengkap;
+			$details['jenis_kelamin'] = $bio->identitas->jenis_kelamin;
 			$details['asal_sekolah'] = $bio->identitas->asal_sekolah;
 			$details['no_wa'] = $bio->identitas->no_wa_siswa;
 			return $details;
@@ -27,10 +29,12 @@ class RoomController extends Controller
 	{
 		$kode_jurusan = strtoupper(request()->query('student'));
 		$test_type = 'tes_' . $req->query('test');
+		$questions = null;
 		$allow = true;
+		$bio = $student = null;
 
 		if ($kode_jurusan) {
-			$bio = User::where('username', $kode_jurusan)->first();
+			$bio = $student = User::where('username', $kode_jurusan)->first();
 
 			if (!$bio) {
 				$allow = false;
@@ -44,9 +48,26 @@ class RoomController extends Controller
 			}
 		}
 
+		if ($student and $student->status and $student->status->get($test_type, false) == true) {
+			$allow = false;
+			alert(['warning' => "Siswa sudah melakukan tes ". request('test') ]);
+		}
+
+		// Quick physics and uniform form
+		if ($kode_jurusan && $test_type != 'wawancara') {
+			try {
+				$questions = Question::with(['type'])->whereRelation('type', 'slug', 'tes-'.$req->query('test'))->get();
+			} catch (\Throwable $th) {
+				$allow = false;
+				alert(['warning' => 'Maaf terjadi kesalahan saat mengambil data soal.']);
+			}
+		}
+
 		return view('pages.dashboard.loby', [
 			'siswa' => $result ?? null,
-			'allow_test' => $allow
+			'student' => $student,
+			'allow_test' => $allow,
+			'questions' => $questions
 		]);
 	}
 }

@@ -66,7 +66,6 @@ class TestController extends Controller
 					'answer.required' => 'Please choose an answer'
 				]
 			);
-			// dd($creden);
 
 			$student = $this->getStudent($req->get('student'));
 			$user = $req->user();
@@ -105,7 +104,7 @@ class TestController extends Controller
 			alert(['success' => 'Berhasil menyimpan jawaban.']);
 			return redirect()->route('dashboard.loby.index', [
 				'test' => $req->get('test'),
-				'student' => $req->get('student'),
+				// 'student' => $req->get('student'),
 			]);
 
 		} catch (\Throwable $th) {

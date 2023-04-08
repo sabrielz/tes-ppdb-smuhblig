@@ -3,11 +3,10 @@
 @section('content')
 <div class="row">
 	<div class="col-md-6">
+		{{-- Select Siswa --}}
 		<div class="card card-default">
-			<div class="card-header">
-				<div class="card-title">
-					Pilih Siswa
-				</div>
+			<div class="card-header py-2">
+				<label> Pilih Siswa </label>
 			</div>
 			<div class="card-body">
 				<div class="col-12">
@@ -40,17 +39,55 @@
 			</div>
 		</div>
 
-		<div class="card card-default">
+		{{-- Quick Form --}}
+		@if (request()->query('student') and request()->query('test') != 'wawancara' and isset($siswa) and count($siswa) > 0 and isset($questions) and count($questions) > 0)
+			<div class="card card-default">
+				<div class="card-header py-2">
+					<label> Quick Form </label>
+				</div>
+				<div class="card-body">
+					<form action="{{ route('dashboard.test.store') }}?{{ request()->getQueryString() }}" method="post"> @csrf
 
-		</div>
+						<div class="row">
+							@foreach ($questions as $quest)
+								<div class="form-group col-12">
+									<label class="form-label d-block">
+										{{ $loop->iteration }}. {{ $quest->question }}
+									</label>
+									<input type="hidden" name="answer[{{ $quest->id }}]" value="">
+
+									@foreach ($quest->pilgan as $key => $pilgan)
+										<div class="d-inline-block form-check mr-2">
+											<input name="answer[{{ $quest->id }}]" id="input-quest-{{ $quest->id }}-{{ $key }}" type="radio" class="form-check-input" value="{{ $key }}">
+											<label for="input-quest-{{ $quest->id }}-{{ $key }}" class="form-check-label">{{ Str::Title($pilgan) }}</label>
+										</div>
+									@endforeach
+
+									@error('answer.' . $quest->id)
+										<p class="m-0 text-danger"> {{ $message }} </p>
+									@enderror
+								</div>
+							@endforeach
+
+							<div class="col-12 text-center">
+								{{-- @dd(isset($student) and $student->status and $student->status->get('tes_'.request()->query('test'))) --}}
+								<button type="submit" class="btn btn-primary" {{ ((isset($siswa) and !empty($siswa)) and ($allow_test ?? null)) ? '' : 'disabled' }}>
+									Submit
+								</button>
+							</div>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		@endif
 	</div>
 
 	<div class="col-md-6">
+		{{-- Detail Student --}}
 		<div class="card card-default">
-			<div class="card-header">
-				<div class="card-title">
-					Detail Siswa
-				</div>
+			<div class="card-header py-2">
+				<label> Detail Siswa </label>
 			</div>
 			<div class="card-body p-0">
 
@@ -76,7 +113,4 @@
 		</div>
 	</div>
 </div>
-
-{{-- @if(isset($siswa) && !empty($siswa))
-@endif --}}
 @endsection

@@ -11,28 +11,32 @@ use Illuminate\Support\Collection;
 
 class StatisticController extends Controller
 {
-    private function getWawancaraStatistic() {
-			$result = Answer::whereRelation('question', 'type_id', 2)->with(['student', 'question'])->paginate(15);
-			$result->setCollection($result->groupBy('student'));
-			return $result;
-    }
+	private function getWawancaraStatistic()
+	{
+		$result = Answer::whereRelation('question', 'type_id', 2)->with(['student', 'question'])->paginate(15);
+		$result->setCollection($result->groupBy('student'));
+		return $result;
+	}
 
-    private function getFisikStatistic() {
-        $result = Answer::whereRelation('question', 'type_id', 1)->with(['student', 'question'])->paginate(15);
-				$result->setCollection($result->groupBy('student'));
-				return $result;
-    }
+	private function getFisikStatistic()
+	{
+		$result = Answer::whereRelation('question', 'type_id', 1)->with(['student', 'question'])->paginate(15);
+		$result->setCollection($result->groupBy('student'));
+		return $result;
+	}
 
-		private function getFisikStudentAnswer($id) {
-			return Answer::whereRelation('student', 'username', $id)->whereRelation('question', 'type_id', 1)->get();
-		}
+	private function getFisikStudentAnswer($id)
+	{
+		return Answer::whereRelation('student', 'username', $id)->whereRelation('question', 'type_id', 1)->get();
+	}
 
-		private function getWawancaraStudentAnswer($id) {
-			return Answer::whereRelation('student', 'username', $id)->whereRelation('question', 'type_id', 2)->get();
-		}
+	private function getWawancaraStudentAnswer($id)
+	{
+		return Answer::whereRelation('student', 'username', $id)->whereRelation('question', 'type_id', 2)->get();
+	}
 
-    public function index(Request $req) :View
-    {
+	public function index(Request $req): View
+	{
 		try {
 			$test = $req->query('test');
 			$method_name = 'get' . ucfirst($test) . 'Statistic';
@@ -45,9 +49,9 @@ class StatisticController extends Controller
 		} catch (\Throwable $th) {
 			throw $th;
 		}
-    }
+	}
 
-	public function detail(Request $req) :View
+	public function detail(Request $req): View
 	{
 		$test = $req->query('test');
 		$id = $req->query('student');
