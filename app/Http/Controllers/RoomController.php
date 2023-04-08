@@ -17,7 +17,7 @@ class RoomController extends Controller
 			$details['jurusan'] = Str::upper($bio->identitas->jurusan->nama);
 			$details['kode_pendaftaran'] = $bio->identitas->jurusan->kode;
 			$details['nama_lengkap'] = $bio->identitas->nama_lengkap;
-			$details['jenis_kelamin'] = $bio->identitas->jenis_kelamin;
+			$details['jenis_kelamin'] = $bio->identitas->jenis_kelamin->label;
 			$details['asal_sekolah'] = $bio->identitas->asal_sekolah;
 			$details['no_wa'] = $bio->identitas->no_wa_siswa;
 			return $details;

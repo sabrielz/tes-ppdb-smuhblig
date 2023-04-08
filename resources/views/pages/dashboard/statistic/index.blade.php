@@ -16,7 +16,7 @@
 									<i class="fa fa-search"></i>
 								</div>
 							</div>
-							<input type="search" name="search" id="" class="text-center form-control form-control-sm" placeholder="Cari nama atau kode jurusan siswa..." value="{{ request('search') }}" />
+							<input type="search" name="search" id="" class="form-control form-control-sm" placeholder="Cari nama atau kode jurusan siswa..." value="{{ request('search') }}" />
 						</div>
 
 						{{-- Sort --}}
@@ -53,6 +53,7 @@
 							</select>
 						</div>
 
+						{{-- Button Action --}}
 						<div class="col-12 text-center mt-2">
 							<button type="reset" class="btn btn-sm px-4 btn-secondary">
 								Reset <i class="fa fa-undo"></i>
@@ -151,11 +152,12 @@
 	<x-modal.detail-siswa />
 @endpush
 
-@push('html_scripts')
+@push('html_styles')
 	<!-- DataTables -->
 	<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+	<style> .table.data-table tr td:nth-child(1) { vertical-align: middle !important } </style>
 @endpush
 
 @push('html_scripts')
@@ -286,13 +288,4 @@
 			"responsive": true,
     }).buttons().container().appendTo('.table-button-wrapper');
 	}) </script>
-	<script>$(function () {
-		$('#thead-form th').map((elem) => {
-			console.log($(elem).parent('form'))
-			$(elem).click(v => {
-				v.preventDefault()
-			})
-
-		})
-	})</script>
 @endpush

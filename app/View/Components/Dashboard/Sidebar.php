@@ -34,6 +34,11 @@ class Sidebar extends Component
                     'icon' => 'fa fa-home',
                 ],
                 [
+                    'label' => 'Semua Siswa',
+                    'href' => '/dashboard/student',
+                    'icon' => 'fa fa-user',
+                ],
+                [
                     'label' => 'Tes Wawancara',
                     'href' => '/dashboard/tes/wawancara',
                     'icon' => 'fa',
