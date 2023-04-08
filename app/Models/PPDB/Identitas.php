@@ -33,4 +33,12 @@ class Identitas extends Model
 		return $this->belongsTo(JenisKelamin::class);
 	}
 
+	/**
+	 * Eloquent relationship hasOne seragam
+	 * @return \Illuminate\Database\Eloquent\Relations\HasOne
+	 */
+	public function seragam () {
+		return $this->hasOne(Seragam::class, 'identitas_id', 'id');
+	}
+
 }

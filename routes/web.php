@@ -5,7 +5,9 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\UniformController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,8 +52,18 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/', 'index')->name('dashboard.index');
     });
 
+    Route::controller(StudentController::class)->group(function () {
+        Route::get('/student', 'index')->name('dashboard.student.index');
+        Route::get('/student/{student:id}', 'select')->name('dashboard.student.select');
+    });
+
     Route::controller(RoomController::class)->middleware(['test'])->group(function () {
         Route::get('/loby', 'index')->name('dashboard.loby.index');
+    });
+
+    Route::controller(UniformController::class)->group(function () {
+        Route::get('/uniform', 'index')->name('dashboard.uniform.index');
+        Route::post('/uniform/{uniform}', 'update')->name('dashboard.uniform.update');
     });
 
     Route::controller(TestController::class)->middleware(['test'])->group(function () {
@@ -62,7 +74,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::controller(QuestionController::class)->group(function () {
         Route::get('/question', 'index')->middleware(['test'])->name('dashboard.question.index');
         Route::get('/question/create', 'create')->name('dashboard.question.create');
-				Route::post('/question/create', 'store')->name('dashboard.question.store');
+		Route::post('/question/create', 'store')->name('dashboard.question.store');
         Route::get('/question/{question}/edit', 'edit')->name('dashboard.question.edit');
         Route::post('/question/{question}', 'update')->name('dashboard.question.update');
         Route::get('/question/{question}/delete', 'delete')->name('dashboard.question.delete');

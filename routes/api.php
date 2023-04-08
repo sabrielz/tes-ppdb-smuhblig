@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\DetailStatisticController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/detail-student', [DetailStatisticController::class, 'index'])->name('api.detail.index');
+
+Route::get('/find-student', [StudentController::class, 'api'])->name('api.student.find');

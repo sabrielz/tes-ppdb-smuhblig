@@ -72,9 +72,7 @@ class ConfigSeeder extends Seeder
                 'name' => 'Metadata Collection',
                 'key' => 'metadata',
                 'value' => json_encode([
-                    '/' => [
-                        'title' => 'Beranda'
-                    ],
+                    '/' => ['title' => 'Beranda'],
                     'login' => ['title' => 'Login'],
                     'dashboard' => ['title' => 'Beranda'],
                     'dashboard/question' => ['title' => 'Kelola Soal'],
@@ -83,6 +81,7 @@ class ConfigSeeder extends Seeder
                     'dashboard/loby' => ['title' => 'Pilih Siswa'],
                     'dashboard/test' => ['title' => 'Ruang Tes'],
                     'dashboard/statistic' => ['title' => 'Kelola Data'],
+                    'dashboard/student' => ['title' => 'Daftar Siswa'],
                 ])
 			],
 			[
