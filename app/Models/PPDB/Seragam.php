@@ -21,6 +21,12 @@ class Seragam extends Model
 	 */
 	protected $table = 'seragams';
 
+	protected $fillable = [
+		'ukuran_wearpack',
+		'ukuran_olahraga',
+		'ukuran_alamamater'
+	];
+	
 	/**
 	 * Eloquent relationship method
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

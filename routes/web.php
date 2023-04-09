@@ -86,5 +86,4 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/statistic/edit', 'edit')->name('dashboard.statistic.edit');
         Route::post('/statistic/edit', 'update')->name('dashboard.statistic.edit');
     });
-
 });

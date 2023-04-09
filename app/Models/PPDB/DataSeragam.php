@@ -21,4 +21,8 @@ class DataSeragam extends Model
 	 */
 	protected $table = 'data_seragams';
 
+	protected $casts = [
+		'ukuran' => 'array'
+	];
+
 }
