@@ -35,7 +35,38 @@
 		</div>
 	</div>
 </div>
+
+<div id="js-default-action-button-group" hidden>
+
+	<div class="btn-group btn-group-sm">
+		<button type="button" class="btn btn-info btn-action" title="Detail Siswa"
+			data-toggle="modal" data-target="#modal-detail-siswa">
+			<i class="fa fa-info"></i>
+		</button>
+
+		<a href="{{ route('dashboard.loby.index', ['test' => 'fisik', 'student' => 0]) }}"
+			title="Tes Fisik"
+			class="btn btn-secondary btn-student">
+			<i class="fa">F</i>
+		</a>
+		<a href="{{ route('dashboard.loby.index', ['test' => 'wawancara', 'student' => 0]) }}"
+			title="Tes Wawancara"
+			class="btn btn-secondary btn-student">
+			<i class="fa">W</i>
+		</a>
+		<a href="{{ route('dashboard.uniform.edit', ['uniform' => 0]) }}"
+			title="Edit Seragam"
+			class="btn btn-secondary btn-uniform">
+			<i class="fa">S</i>
+		</a>
+	</div>
+
+</div>
 @endsection
+
+@push('html_modals')
+	<x-modal.detail-siswa />
+@endpush
 
 @push('html_styles')
 	<!-- DataTables -->
@@ -67,7 +98,6 @@
 				}, 1000);
 			})
 
-
 			let datatable = $("table.data-table").DataTable({
 				responsive: true,
 				paging: true,
@@ -91,8 +121,23 @@
 					{ data: 'jurusan.kode' },
 					{
 						data: null,
-						render: function () {
-							return 'some'
+						render: function (student) { // student === identitas model instance
+							let rawActionElement = $('#js-default-action-button-group').clone(),
+								btnTestElements = $(rawActionElement).find('a.btn-student'),
+								btnDetailElement = $(rawActionElement).find('button.btn-action').first(),
+								btnSeragamElement = $(rawActionElement).find('a.btn-uniform').first(),
+								newSeragamHref = btnSeragamElement.attr('href').slice(0, -1) + student.id
+
+							rawActionElement.attr('hidden', null)
+							btnDetailElement.attr('onclick', 'fetchData('+student.id+')')
+							btnSeragamElement.attr('href', newSeragamHref)
+							btnTestElements.map((index, element) => {
+								// remove 0 value in [?student=0] query param
+								let hrefValue = $(element).attr('href').slice(0, -1) + (student.jurusan.kode || '')
+								$(element).attr('href', hrefValue)
+							})
+
+							return rawActionElement.html()
 						}
 					},
 				]
@@ -120,5 +165,98 @@
 				})
 			}
 		})
+	</script>
+	{{-- Ajax Button Detail Student --}}
+	<script>
+		const fetchData = (id) => {
+			$.ajax({
+				type: "get",
+				url: "{{ route('api.detail.index') }}",
+				data: { id: id },
+				success: function (response) {
+					$('#detail-body').html(`
+						<table class="table table-sm table-borderless w-auto">
+							<tbody>
+									<tr>
+										<th>Nama Lengkap</th>
+										<td>:</td>
+										<td>${response.data.nama_lengkap}</td>
+									</tr>
+									<tr>
+										<th>Alamat</th>
+										<td>:</td>
+										<td>${response.data.alamat_desa}, ${response.data.alamat_kec}, ${response.data.alamat_kota_kab}, RT ${response.data.alamat_rt}, RW ${response.data.alamat_rw}</td>
+									</tr>
+									<tr>
+										<th>Tempat / Tanggal Lahir</th>
+										<td>:</td>
+										<td>${response.data.tempat_lahir} / ${response.data.tanggal_lahir}</td>
+									</tr>
+									<tr>
+										<th>Jenis Kelamin</th>
+										<td>:</td>
+										<td>${response.data.jenis_kelamin.label}</td>
+									</tr>
+									<tr>
+										<th>Asal Sekolah</th>
+										<td>:</td>
+										<td>${response.data.asal_sekolah}</td>
+									</tr>
+									<tr>
+										<th>Nomor WA</th>
+										<td>:</td>
+										<td>${response.data.no_wa_siswa}</td>
+									</tr>
+									<tr>
+										<th>WA Orang Tua</th>
+										<td>:</td>
+										<td>${response.data.no_wa_ortu ?? '-'}</td>
+									</tr>
+									<tr>
+										<th>Nama Ayah</th>
+										<td>:</td>
+										<td>${response.data.nama_ayah}</td>
+									</tr>
+									<tr>
+										<th>Nama Ibu</th>
+										<td>:</td>
+										<td>${response.data.nama_ibu}</td>
+									</tr>
+									<tr>
+										<th>Tahun Lahir Ayah</th>
+										<td>:</td>
+										<td>${response.data.tahun_lahir_ayah ?? '-'}</td>
+									</tr>
+									<tr>
+										<th>Tahun Lahir Ibu</th>
+										<td>:</td>
+										<td>${response.data.tahun_lahir_ibu ?? '-'}</td>
+									</tr>
+									<tr>
+										<th>NIK</th>
+										<td>:</td>
+										<td>${response.data.nik ?? '-'}</td>
+									</tr>
+									<tr>
+										<th>NISN</th>
+										<td>:</td>
+										<td>${response.data.nisn ?? '-'}</td>
+									</tr>
+									<tr>
+										<th>No. Ijazah</th>
+										<td>:</td>
+										<td>${response.data.no_ijazah ?? '-'}</td>
+									</tr>
+									<tr>
+										<th>No. Ujian Nasional</th>
+										<td>:</td>
+										<td>${response.data.no_ujian_nasional ?? '-'}</td>
+									</tr>
+							</tbody>
+						</table>
+					`);
+				}
+			});
+		}
 	</script>
 @endpush

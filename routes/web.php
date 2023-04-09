@@ -63,6 +63,7 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
 
     Route::controller(UniformController::class)->group(function () {
         Route::get('/uniform', 'index')->name('dashboard.uniform.index');
+        Route::get('/uniform/{uniform}', 'edit')->name('dashboard.uniform.edit');
         Route::post('/uniform/{uniform}', 'update')->name('dashboard.uniform.update');
     });
 
