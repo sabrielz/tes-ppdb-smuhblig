@@ -90,7 +90,7 @@
 				students = null,
 				counter = 1;
 
-			$('#input-search').on('keyup', function () {
+			$('#input-search').on('keyup keypress blur change', function () {
 				if (findStudent !== null) clearTimeout(findStudent)
 				findStudent = setTimeout(() => {
 					let pattern = $('#input-search').val();
