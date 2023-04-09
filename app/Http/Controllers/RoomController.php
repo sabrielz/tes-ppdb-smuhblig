@@ -36,9 +36,13 @@ class RoomController extends Controller
 		if ($kode_jurusan) {
 			$bio = $student = User::where('username', $kode_jurusan)->first();
 
+			// dd($bio->identitas->verifikasi->daftar_ulang);
 			if (!$bio) {
 				$allow = false;
 				alert(['warning' => "Maaf, siswa tidak ditemukan."]);
+			} else if(!$bio->identitas->verifikasi->daftar_ulang) {
+				$allow = false;
+				alert(['warning' => "Maaf, siswa belum memenuhi syarat verifikasi."]);
 			} else {
 				$result = recollect($this->isBio($bio));
 				if ($bio->status && $bio->status->$test_type) {

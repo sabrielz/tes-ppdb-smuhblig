@@ -15,7 +15,9 @@ class StatisticController extends Controller
 	{
 		// $result = Answer::whereRelation('question', 'type_id', 2)->with(['student', 'question'])->paginate(15);
 		// $result->setCollection($result->groupBy('student'));
-		$result = User::where('level_id', 1)->filter(request(['search', 'sort']))->has('identitas')->with(['answers', 'identitas'])->groupBy('identitas_id')->paginate(15)->withQueryString();
+		$result = User::where('level_id', 1)->filter(request(['search', 'sort']))->whereHas('identitas', function($query) {
+			return $query->whereRelation('verifikasi', 'daftar_ulang', true);
+		})->with(['answers', 'identitas'])->groupBy('identitas_id')->paginate(15)->withQueryString();
 		// dd($result);
 		return $result;
 	}
@@ -24,7 +26,9 @@ class StatisticController extends Controller
 	{
 		// $result = Answer::whereRelation('question', 'type_id', 1)->with(['student', 'question'])->paginate(15);
 		// $result->setCollection($result->groupBy('student'));
-		$result = User::where('level_id', 1)->filter(request(['search', 'sort']))->has('identitas')->with(['answers', 'identitas'])->groupBy('identitas_id')->paginate(15)->withQueryString();
+		$result = User::where('level_id', 1)->filter(request(['search', 'sort']))->whereHas('identitas', function($query) {
+			return $query->whereRelation('verifikasi', 'daftar_ulang', true);
+		})->with(['answers', 'identitas'])->groupBy('identitas_id')->paginate(15)->withQueryString();
 		return $result;
 	}
 

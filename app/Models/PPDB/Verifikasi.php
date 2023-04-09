@@ -17,6 +17,6 @@ class Verifikasi extends Model
 
 		public function student()
 		{
-			return $this->belongsTo(Student::class, 'identitas_id', 'id');
+			return $this->belongsTo(User::class, 'identitas_id');
 		}
 }
