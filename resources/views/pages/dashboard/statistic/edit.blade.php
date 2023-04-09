@@ -24,7 +24,6 @@
 									id="input-quest-{{ $quest->id }}"
 									placeholder="Jawaban..."
 									class="form-control"
-									disabled
 								>{{ $quest->answer }}</textarea>
 							{{--  --}}
 							@else
@@ -32,7 +31,7 @@
 								@foreach ($quest->question->pilgan as $key => $pilgan)
 									<?php $selected = $quest->answer == $key ?>
 									<div class="d-flex form-check mr-2">
-										<input disabled @checked($selected) name="answer[{{ $quest->id }}]" id="input-quest-{{ $quest->id }}-{{ $key }}" type="radio" class="form-check-input" value="{{ $key }}">
+										<input @checked($selected) name="answer[{{ $quest->id }}]" id="input-quest-{{ $quest->id }}-{{ $key }}" type="radio" class="form-check-input" value="{{ $key }}">
 										<label for="input-quest-{{ $quest->id }}-{{ $key }}" class="form-check-label">{{ Str::Title($pilgan) }}</label>
 									</div>
 								@endforeach
@@ -45,13 +44,9 @@
 			@endif
 
 			<div class="col-12 text-center mb-4">
-				<?php $payload = [
-					'student' => $questions[0]->student->username,
-					'test' => request()->query('test')
-				] ?>
-				<a href="{{ route('dashboard.statistic.edit', $payload) }}" class="btn btn-warning">
-					Edit <i class="fa fa-edit"></i>
-				</a>
+				<button type="submit" class="btn btn-primary">
+					Save <i class="fa fa-angle-right"></i>
+				</button>
 			</div>
 
 		</div>

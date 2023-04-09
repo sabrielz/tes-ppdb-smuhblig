@@ -148,7 +148,7 @@
 					const resetCounter = () => {
 						let container = document.getElementById('pilihan-col');
 						let inputs = container.querySelectorAll('input');
-						// console.log(inputs);
+					// console.log(inputs);
 						inputCount = 0;
 						let counter = 0;
 						inputs.forEach(input => {

@@ -83,6 +83,8 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
     Route::controller(StatisticController::class)->middleware(['test'])->group(function () {
         Route::get('/statistic', 'index')->name('dashboard.statistic.index');
         Route::get('/statistic/detail', 'detail')->name('dashboard.statistic.detail');
+        Route::get('/statistic/edit', 'edit')->name('dashboard.statistic.edit');
+        Route::post('/statistic/edit', 'update')->name('dashboard.statistic.edit');
     });
 
 });

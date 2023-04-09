@@ -72,4 +72,53 @@ class StatisticController extends Controller
 			'questions' => $data
 		]);
 	}
+
+	public function edit(Request $req)
+	{
+		$test = $req->query('test');
+		$id = $req->query('student');
+		$method_name = 'get' . ucfirst($test) . 'StudentAnswer';
+		$data = $this->$method_name($id);
+		// dd($data);
+		// $test = $req->query('test');
+		// $identitas_id = $req->query('id');
+
+		// $abort = !in_array($test, ['wawancara', 'fisik', 'detail']);
+		// $abort = $abort or is_null($identitas_id) or empty($identitas_id);
+		// if ($abort) return redirect()->route('dashboard.statistic.index', ['test' => $test]);
+
+		return view('pages.dashboard.statistic.edit', [
+			'questions' => $data
+		]);
+	}
+
+	public function update(Request $req)
+	{
+		$test_type = $req->get('test');
+
+		$creden = $req->validate(
+			[
+				'answer' => 'required|array',
+				'answer.*' => 'required'
+			],
+			[
+				'answer.*.required' => 'The answer is required',
+				'answer.required' => 'Please choose an answer'
+			]
+		);
+		// dd($student);
+
+		foreach ($creden['answer'] as $id => $answer) {
+			dispatch(function () use ($id, $answer) {
+				Answer::find($id)->update([
+					'answer' => $answer
+				]);
+			});
+		}
+
+		alert(['success' => 'Berhasil mengubah jawaban.']);
+			return redirect()->route('dashboard.statistic.index', [
+				'test' => $req->get('test'),
+			]);
+	}
 }
