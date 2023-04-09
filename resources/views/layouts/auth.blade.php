@@ -8,8 +8,8 @@
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
       {{-- <a href="../../index2.html" class="h1"><b>Admin</b>LTE</a> --}}
-			<img src="{{ asset($appconfigs['general']['value']['company']['logo']) }}"
-				alt="{{ $appconfigs['general']['value']['company']['name'] }}"
+			<img src="{{ asset('assets/img/logo-smk.png') }}"
+				alt="Logo {{ $appconfigs['general']['value']['company']['name'] ?? '' }}"
 				width="auto" height="50"
 				class="">
     </div>
