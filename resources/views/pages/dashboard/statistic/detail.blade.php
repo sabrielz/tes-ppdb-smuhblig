@@ -30,7 +30,7 @@
 							@else
 								<input type="hidden" name="answer[{{ $quest->id }}]" value="">
 								@foreach ($quest->question->pilgan as $key => $pilgan)
-									<?php $selected = $key == $quest->answer ?>
+									<?php $selected = $quest->answer == $key ?>
 									<div class="d-flex form-check mr-2">
 										<input disabled @checked($selected) name="answer[{{ $quest->id }}]" id="input-quest-{{ $quest->id }}-{{ $key }}" type="radio" class="form-check-input" value="{{ $key }}">
 										<label for="input-quest-{{ $quest->id }}-{{ $key }}" class="form-check-label">{{ Str::Title($pilgan) }}</label>

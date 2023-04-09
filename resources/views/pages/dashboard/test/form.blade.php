@@ -23,7 +23,7 @@
 								id="input-quest-{{ $quest->id }}"
 								placeholder="Jawaban..."
 								class="form-control"
-							></textarea>
+							>{{ old('answer.' . $quest->id) }}</textarea>
 
 							@error('answer.' . $quest->id)
 								<p class="m-0 text-danger">
@@ -36,7 +36,8 @@
 							<input type="hidden" name="answer[{{ $quest->id }}]" value="">
 							@foreach ($quest->pilgan as $key => $pilgan)
 								<div class="d-flex form-check mr-2">
-									<input name="answer[{{ $quest->id }}]" id="input-quest-{{ $quest->id }}-{{ $key }}" type="radio" class="form-check-input" value="{{ $key }}">
+									<?php $selected = old('answer.' . $quest->id) == $key ?>
+									<input @checked($selected) name="answer[{{ $quest->id }}]" id="input-quest-{{ $quest->id }}-{{ $key }}" type="radio" class="form-check-input" value="{{ $key }}">
 									<label for="input-quest-{{ $quest->id }}-{{ $key }}" class="form-check-label">{{ Str::Title($pilgan) }}</label>
 								</div>
 							@endforeach

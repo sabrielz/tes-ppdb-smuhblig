@@ -22,17 +22,26 @@ class Status extends Model
 	 */
 	protected $guarded = ['id'];
 
+	protected $table = 'statuses';
+
+	public function __construct(array $attributes = [])
+		{
+				$this->table = env('DB_DATABASE').'.'.$this->table;
+				parent::__construct();
+		}
+
+
 	/**
 	 * Eloquent Relationship Methods
 	 */
 	public function student () {
-		return $this->setConnection('mysql1')->belongsTo(User::class, 'student_id', 'id');
+		return $this->belongsTo(User::class, 'student_id', 'id');
 	}
 	public function admin_tes_wawancara() {
-		return $this->setConnection('mysql1')->belongsTo(User::class, 'admin_tes_wawancara_id', 'id');
+		return $this->belongsTo(User::class, 'admin_tes_wawancara_id', 'id');
 	}
 	public function admin_tes_fisik() {
-		return $this->setConnection('mysql1')->belongsTo(User::class, 'admin_tes_fisik_id', 'id');
+		return $this->belongsTo(User::class, 'admin_tes_fisik_id', 'id');
 	}
 
 }

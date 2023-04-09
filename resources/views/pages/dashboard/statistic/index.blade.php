@@ -30,7 +30,7 @@
 								<option value="">-- Urutkan --</option>
 								@foreach (['id', 'nama_siswa', 'kode_jurusan', 'status', 'terbaru'] as $option)
 									<option value="{{ $option }}" @selected($option == request('sort'))>
-										{{ Str::title(str_replace('_', ' ', $option)) }}
+										{{ Str::upper(str_replace('_', ' ', $option)) }}
 									</option>
 								@endforeach
 							</select>
@@ -47,7 +47,7 @@
 								<option value="">-- Jenis Urutan --</option>
 								@foreach (['normal', 'reverse'] as $option)
 									<option value="{{ $option }}" @selected($option == request('order'))>
-										{{ Str::title(str_replace('_', ' ', $option)) }}
+										{{ Str::upper(str_replace('_', ' ', $option)) }}
 									</option>
 								@endforeach
 							</select>
@@ -55,7 +55,7 @@
 
 						{{-- Button Action --}}
 						<div class="col-12 text-center mt-2">
-							<button type="reset" class="btn btn-sm px-4 btn-secondary">
+							<button type="reset" onclick="location.href = '/dashboard/statistic?test={{ request('test') }}'" class="btn btn-sm px-4 btn-secondary">
 								Reset <i class="fa fa-undo"></i>
 							</button>
 							<button type="submit" class="btn btn-sm px-4 btn-primary">
@@ -84,13 +84,13 @@
 					</thead>
 					<tbody>
 						@foreach ($students as $student => $answers)
-							<?php $student = recollect(json_decode($student, true)) ?>
 							<tr>
-								<td>{{ $loop->iteration }}</td>
-								<td>{{ $student->get('identitas')->get('nama_lengkap') }}</td>
-								<td>{{ format_tanggal($student->get('identitas')->get('tanggal_lahir')) }}</td>
+								<td>{{ $loop->index + $students->firstItem() }}</td>
+								<td>{{ $answers->identitas->nama_lengkap ?? ''}}</td>
+								<td>{{ $answers->username }}</td>
 								<td>
-									@if ($student->get('status')->get('tes_'.request()->query('test')))
+									<?php $tes = 'tes_'. request()->query('test') ?>
+									@if ($answers->status && $answers->status->$tes)
 										<span class="badge badge-success">Sudah Tes</span>
 									@else
 										<span class="badge badge-danger">Belum Tes</span>
@@ -101,29 +101,46 @@
 
 										{{-- Detail --}}
 										<button type="button" class="btn btn-info btn-action" id="detail-siswa-{{ $loop->iteration }}" title="Detail Siswa"
-											data-toggle="modal" data-target="#modal-detail-siswa" data-id="{{ $student->get('identitas')->get('id') }}" onclick="fetchData({{ $student->get('identitas')->get('id') }})">
+											data-toggle="modal" data-target="#modal-detail-siswa" data-id="{{ $answers->identitas->id }}" onclick="fetchData({{ $answers->identitas->id }})">
 											<i class="fa fa-info"></i>
 										</button>
 
 										<?php $payloads = [
-											'student' => $answers[0]->student->username,
+											'student' => $answers->username,
 											'test' => request()->query('test')
 										] ?>
 
 										@if (request()->query('test') == 'wawancara')
-											{{-- Tes Wawancara --}}
-											<a href="{{ route('dashboard.statistic.detail', $payloads) }}"
-												title="Hasil Tes Wawancara"
-												class="btn btn-action btn-secondary">
-												<i class="fa">W</i>
-											</a>
+											@if ($answers->status && $answers->status->$tes)
+												<a href="{{ route('dashboard.statistic.detail', $payloads) }}"
+													title="Hasil Tes Wawancara"
+													class="btn btn-action btn-secondary">
+													<i class="fa">W</i>
+												</a>
+											@else
+												{{-- Tes Wawancara --}}
+												<a href="{{ route('dashboard.test.index', $payloads) }}"
+													title="Hasil Tes Wawancara"
+													class="btn btn-action btn-secondary">
+													<i class="fa">W</i>
+												</a>
+											@endif
 										@elseif(request()->query('test') == 'fisik')
-											{{-- Tes Fisik --}}
-											<a href="{{ route('dashboard.statistic.detail', $payloads) }}"
-												title="Hasil Tes Fisik"
-												class="btn btn-action btn-secondary">
-												<i class="fa">F</i>
-											</a>
+											@if ($answers->status && $answers->status->$tes)
+												{{-- Tes Fisik --}}
+												<a href="{{ route('dashboard.statistic.detail', $payloads) }}"
+													title="Hasil Tes Fisik"
+													class="btn btn-action btn-secondary">
+													<i class="fa">F</i>
+												</a>
+											@else
+												{{-- Tes Fisik --}}
+												<a href="{{ route('dashboard.loby.index', $payloads) }}"
+													title="Hasil Tes Fisik"
+													class="btn btn-action btn-secondary">
+													<i class="fa">F</i>
+												</a>
+											@endif
 										@endif
 
 
@@ -282,7 +299,7 @@
 			"paging": false,
 			"lengthChange": false,
 			"searching": false,
-			"ordering": true,
+			"ordering": false,
 			"info": false,
 			"autoWidth": false,
 			"responsive": true,

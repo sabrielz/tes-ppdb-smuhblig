@@ -23,8 +23,8 @@ class User extends Authenticatable
 	use HasApiTokens, HasFactory, Notifiable;
 
 	protected $connection = 'mysql1';
-	protected $with = ['level', 'identitas', 'status'];
-protected $table = 'users';
+	protected $with = ['level', 'identitas'];
+	protected $table = 'users';
 
 	public function __construct(array $attributes = [])
 		{
@@ -82,11 +82,65 @@ protected $table = 'users';
 
 	public function answers()
 	{
-		return $this->setConnection('mysql')->hasMany(Answer::class, 'student_id', 'id');
+		return $this->hasMany(Answer::class, 'student_id');
 	}
 
 	public function status () {
-		return $this->setConnection('mysql')->hasOne(Status::class, 'student_id', 'id');
+		return $this->hasOne(Status::class, 'student_id');
+	}
+
+	public function scopeFilter($query, array $filters)
+	{
+		$query->when($filters['search'] ?? false, function($query, $search) {
+			return $query->where('username', 'like', '%'. $search .'%')
+									 ->orWhere('name', 'like', '%'. $search . '%');
+		});
+
+		$query->when($filters['sort'] ?? false, function($query, $sort) {
+			switch ($sort) {
+				case 'nama_siswa':
+					if (request('order') == 'normal') {
+						return $query->orderBy('name', 'asc');
+					} else if(request('order') == 'reverse') {
+						return $query->orderBy('name', 'desc');
+					}
+					break;
+				case 'kode_jurusan':
+					if (request('order') == 'normal') {
+						return $query->orderBy('username', 'asc');
+					} else if(request('order') == 'reverse') {
+						return $query->orderBy('username', 'desc');
+					}
+					break;
+				case 'id':
+					if (request('order') == 'normal') {
+						return $query->orderBy('id', 'asc');
+					} else if(request('order') == 'reverse') {
+						return $query->orderBy('id', 'desc');
+					}
+					break;
+				case 'status':
+					if (request('order') == 'normal') {
+						return $query->whereHas('status', function($query) {
+							$query->where('tes_'.request('test'), true);
+						});
+					} else if(request('order') == 'reverse') {
+						return $query->doesntHave('status')->orWhereHas('status', function($query) {
+							$query->where('tes_'.request('test'), false);
+						});
+					}
+					break;
+				case 'terbaru':
+					if (request('order') == 'normal') {
+						return $query->whereHas('status', function($query) {
+							$query->orderBy('updated_at', 'asc');
+						})->orDoesntHave('status');
+					} else if(request('order') == 'reverse') {
+						return $query->orderBy('id', 'desc');
+					}
+					break;
+			}
+		});
 	}
 
 }

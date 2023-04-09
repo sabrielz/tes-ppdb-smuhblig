@@ -16,6 +16,16 @@ class Answer extends Model
         'question_id',
         'answer'
     ];
+
+		protected $table = 'answers';
+
+		public function __construct(array $attributes = [])
+		{
+				$this->table = env('DB_DATABASE').'.'.$this->table;
+				parent::__construct();
+		}
+
+
     protected $dates = ['deleted_at'];
 
 		protected $with = ['question'];

@@ -49,7 +49,7 @@
 							<?php
 								$name = 'jurusan[' . $loop->index . ']';
 								$selected = old($name);
-								if ($question->get('jurusan')) {
+								if ($question->jurusan) {
 									$result = $question->jurusan->contains($jrs->id);
 									if($result) {
 										$selected = true;
@@ -88,9 +88,9 @@
 						class="form-control"
 						placeholder="(Opsional) Masukkan jawaban..."
 					> {{ old('answer') ?? $question->get('answer') ?? null }} </textarea> --}}
-					@if ($question->get('pilgan') || !empty($question->get('pilgan')))
+					@if ($question->pilgan || !empty($question->pilgan))
 						<div id="pilihan-col">
-							@foreach ($question->get('pilgan') as $pilgan)
+							@foreach ($question->pilgan as $pilgan)
 								{{-- <input name="pilgan[{{ $loop->iteration }}]" type="text" class="form-control mb-2" placeholder="(Opsional) Pilihan {{ $loop->iteration }}" value="{{ $pilgan }}"> --}}
 								<div class="input-group input-group-sm mb-2">
 									<input name="pilgan[{{ $loop->iteration }}]" type="text" class="form-control" value="{{ $pilgan }}">
@@ -120,7 +120,7 @@
 			@push('html_scripts')
 				<script>
 					const container = document.getElementById('pilihan-col');
-					var inputCount = {{ $question->get('pilgan') ? count($question->pilgan) : 1 }};
+					var inputCount = {{ $question->pilgan ? count($question->pilgan) : 1 }};
 					const addCol = () => {
 						inputCount++;
 						if(inputCount > 5){
@@ -148,7 +148,7 @@
 					const resetCounter = () => {
 						let container = document.getElementById('pilihan-col');
 						let inputs = container.querySelectorAll('input');
-						console.log(inputs);
+						// console.log(inputs);
 						inputCount = 0;
 						let counter = 0;
 						inputs.forEach(input => {
@@ -169,7 +169,7 @@
 						id=""
 						class="form-control"
 						placeholder="(Opsional) Masukkan jawaban... / Nomor Pilihan yang benar"
-					>{{ old('answer') ?? $question->get('answer') ?? null }}</textarea>
+					>{{ old('answer') ?? $question->answer ?? null }}</textarea>
 				</div>
 			</div>
 
