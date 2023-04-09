@@ -105,45 +105,22 @@
 											<i class="fa fa-info"></i>
 										</button>
 
-										<?php $payloads = [
-											'student' => $answers->username,
-											'test' => request()->query('test')
-										] ?>
+										<?php
+											$test_type = request()->query('test');
+											$payloads = [
+												'student' => $answers->username,
+												'test' => $test_type
+											];
+											$route = $answers->status && $answers->status->get("tes_$test_type") == true
+												? route('dashboard.statistic.detail', $payloads)
+												: route('dashboard.test.index', $payloads);
+										?>
 
-										@if (request()->query('test') == 'wawancara')
-											@if ($answers->status && $answers->status->$tes)
-												<a href="{{ route('dashboard.statistic.detail', $payloads) }}"
-													title="Hasil Tes Wawancara"
-													class="btn btn-action btn-secondary">
-													<i class="fa">W</i>
-												</a>
-											@else
-												{{-- Tes Wawancara --}}
-												<a href="{{ route('dashboard.test.index', $payloads) }}"
-													title="Hasil Tes Wawancara"
-													class="btn btn-action btn-secondary">
-													<i class="fa">W</i>
-												</a>
-											@endif
-										@elseif(request()->query('test') == 'fisik')
-											@if ($answers->status && $answers->status->$tes)
-												{{-- Tes Fisik --}}
-												<a href="{{ route('dashboard.statistic.detail', $payloads) }}"
-													title="Hasil Tes Fisik"
-													class="btn btn-action btn-secondary">
-													<i class="fa">F</i>
-												</a>
-											@else
-												{{-- Tes Fisik --}}
-												<a href="{{ route('dashboard.loby.index', $payloads) }}"
-													title="Hasil Tes Fisik"
-													class="btn btn-action btn-secondary">
-													<i class="fa">F</i>
-												</a>
-											@endif
-										@endif
-
-
+										<a href="{{ $route }}"
+											title="Hasil Tes {{ ucfirst($test_type) }}"
+											class="btn btn-action btn-secondary">
+											<i class="fa">{{ ucfirst(substr($test_type, 0, 1)) }}</i>
+										</a>
 
 									</div>
 								</td>

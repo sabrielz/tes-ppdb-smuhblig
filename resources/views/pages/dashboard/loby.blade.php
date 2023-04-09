@@ -30,12 +30,18 @@
 					</form>
 				</div>
 
-				<div class="col-12 mt-3">
+				<div class="col-12 mt-2 btn-group">
+					<a href="{{ route('dashboard.student.index') }}" class="btn btn-outline-success">
+						Cari Siswa
+					</a>
 					<a href="{{ route('dashboard.test.index') . '?' . request()->getQueryString() }}"
-						class="d-block btn btn-success mx-auto {{ ((isset($siswa) and !empty($siswa)) and ($allow_test ?? null)) ? '' : 'disabled' }}">
+						class="btn btn-success {{ ((isset($siswa) and !empty($siswa)) and ($allow_test ?? null)) ? '' : 'disabled' }}">
 						Mulai Tes {{ Str::title( request()->query('test') ) }}
 					</a>
 				</div>
+
+				{{-- <div class="col-12 mt-1">
+				</div> --}}
 			</div>
 		</div>
 

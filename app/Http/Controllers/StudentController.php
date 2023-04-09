@@ -17,7 +17,7 @@ class StudentController extends Controller
 				->orWhere('nama_lengkap', 'like', '%'.$req->query('search').'%')
 				->orWhere('asal_sekolah', 'like', '%'.$req->query('search').'%')
 				->whereRelation('verifikasi', 'daftar_ulang', true)
-				->with(['jurusan'])->get()->toArray();
+				->with(['jurusan', 'user'])->get()->toArray();
 		}
 
 		return response()->json([
