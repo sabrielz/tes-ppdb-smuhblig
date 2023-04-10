@@ -109,10 +109,14 @@ class QuestionController extends Controller
 		
 				if($req->pilgan) {
 					$payload['pilgan'] = $req->pilgan;
+				} else {
+					$payload['pilgan'] = null;
 				}
 		
 				if($req->answer) {
 					$payload['answer'] = $req->answer;
+				} else {
+					$payload['answer'] = null;
 				}
 		
 				$question->update($payload);
