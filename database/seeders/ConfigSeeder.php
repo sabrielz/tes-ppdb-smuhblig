@@ -82,6 +82,7 @@ class ConfigSeeder extends Seeder
                     'dashboard/test' => ['title' => 'Ruang Tes'],
                     'dashboard/statistic' => ['title' => 'Kelola Data'],
                     'dashboard/student' => ['title' => 'Daftar Siswa'],
+                    'dashboard/uniform' => ['title' => 'Edit Seragam'],
                 ])
 			],
 			[

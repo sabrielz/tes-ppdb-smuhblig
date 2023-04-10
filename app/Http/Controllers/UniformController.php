@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PPDB\DataSeragam;
+use App\Models\PPDB\Identitas;
 use App\Models\PPDB\Seragam;
 use App\Models\PPDB\User;
 use App\Models\Question;
@@ -26,45 +27,27 @@ class UniformController extends Controller
 		return $details = [];
 	}
 
-	public function index(Request $req)
+	/**
+	 * Edit student uniform
+	 */
+	public function edit (Request $req)
 	{
-		$kode_jurusan = strtoupper(request()->query('student'));
-		$test_type = 'tes_' . $req->query('test');
-		$questions = null;
+		$kode_jurusan = $req->query('student');
+		$student = null; $questions = null;
 		$allow = true;
-		$bio = $student = null;
 
 		if ($kode_jurusan) {
-			$bio = $student = User::where('username', $kode_jurusan)->first();
+			$student = User::where('username', $kode_jurusan)->first();
+			$result = recollect($this->isBio($student));
 
-			// dd($bio->identitas->verifikasi->daftar_ulang);
-			if (!$bio) {
-				$allow = false;
-				alert(['warning' => "Maaf, siswa tidak ditemukan."]);
-			} else if(!$bio->identitas->verifikasi->daftar_ulang) {
-				$allow = false;
-				alert(['warning' => "Maaf, siswa belum memenuhi syarat verifikasi."]);
-			} else if(!$bio->identitas->verifikasi->seragam) {
-				$allow = false;
-				alert(['warning' => "Maaf, sudah melakukan pengukuran seragam."]);
-			} else {
-				$result = recollect($this->isBio($bio));
-				if ($bio->status && $bio->status->$test_type) {
-					$allow = false;
-					alert(['warning' => "Siswa sudah melakukan tes ". request('test') ]);
-				}
-			}
-		}
-
-		// Quick physics and uniform form
-		// if ($kode_jurusan && $test_type != 'wawancara') {
 			try {
 				$questions = DataSeragam::all();
 			} catch (\Throwable $th) {
 				$allow = false;
-				alert(['warning' => 'Maaf terjadi kesalahan saat mengambil data soal.']);
+				alert(['warning' => 'Maaf, terjadi kesalahan saat mengambil data soal.']);
 			}
-		// }
+		}
+
 
 		return view('pages.dashboard.uniform', [
 			'siswa' => $result ?? null,

@@ -87,6 +87,12 @@ class Sidebar extends Component
                 ],
 
                 [
+                    'label' => 'Seragam',
+                    'href' => '/dashboard/uniform',
+                    'icon' => 'fa fa-user-clothes',
+                ],
+
+                [
                     'label' => 'Pengaturan',
                     'href' => '/dashboard/settings',
                     'icon' => 'fa fa-cog',
