@@ -120,6 +120,7 @@ class User extends Authenticatable
 					}
 					break;
 				case 'status':
+					if (is_null(request('test'))) break;
 					if (request('order') == 'normal') {
 						return $query->whereHas('status', function($query) {
 							$query->where('tes_'.request('test'), true);

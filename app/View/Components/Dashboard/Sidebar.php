@@ -105,11 +105,6 @@ class Sidebar extends Component
                 ],
 
                 [
-                    'label' => 'Pengaturan',
-                    'href' => '/dashboard/settings',
-                    'icon' => 'fa fa-cog',
-                ],
-                [
                     'label' => 'Log Out',
                     'href' => '/logout',
                     'icon' => 'fa fa-power-off',

@@ -106,12 +106,12 @@
 										</button>
 
 										<?php
-											$test_type = request()->query('test');
+											$test_type = "tes_".request()->query('test');
 											$payloads = [
 												'student' => $answers->username,
-												'test' => $test_type
+												'test' => request()->query('test')
 											];
-											$route = $answers->status && $answers->status->get("tes_$test_type") == true
+											$route = $answers->status && $answers->status->$test_type
 												? route('dashboard.statistic.detail', $payloads)
 												: route('dashboard.test.index', $payloads);
 										?>

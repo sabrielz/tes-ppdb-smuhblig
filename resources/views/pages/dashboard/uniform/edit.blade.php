@@ -33,7 +33,7 @@
 		</div>
 
 		{{-- Quick Form --}}
-		@if (request()->query('student') && $siswa && $allow_test)
+		@if ($siswa && $allow_test)
 			<div class="card card-default">
 				<div class="card-header py-2">
 					<label> Quick Form </label>

@@ -51,6 +51,16 @@ class UniformController extends Controller
 			$student = User::where('username', $kode_jurusan)->first();
 			$result = recollect($this->isBio($student));
 
+			// dd($student->identitas->seragam->ukuran_almamater);
+
+			if(!$student) {
+				$allow = false;
+				alert(['warning' => "Maaf, siswa tidak ditemukan."]);
+			} else if(!$student->identitas->verifikasi->daftar_ulang) {
+				$allow = false;
+				alert(['warning' => "Maaf, siswa belum memenuhi syarat verifikasi."]);
+			}
+
 			try {
 				$questions = DataSeragam::all();
 			} catch (\Throwable $th) {

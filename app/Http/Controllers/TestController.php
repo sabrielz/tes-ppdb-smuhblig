@@ -102,7 +102,7 @@ class TestController extends Controller
 			}
 
 			alert(['success' => 'Berhasil menyimpan jawaban.']);
-			return redirect()->route('dashboard.loby.index', [
+			return redirect()->route('dashboard.statistic.index', [
 				'test' => $req->get('test'),
 				// 'student' => $req->get('student'),
 			]);

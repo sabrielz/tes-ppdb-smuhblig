@@ -1,13 +1,16 @@
 @extends('layouts.dashboard')
 
 <?php
-	if (!isset($question) or empty($question)) {
-		$question = collect([
-			'id' => null,
-			'question' => null,
-			'answer' => null,
-		]);
-	}
+
+	// if (!isset($question) or empty($question)) {
+	// 	$question = collect([
+	// 		'id' => null,
+	// 		'question' => null,
+	// 		'answer' => null,
+	// 		'jurusan' => null,
+	// 	]);
+	// }
+	$question ??= collect();
 	$method ??= 'create';
 
 	$action; $submethod;
@@ -43,13 +46,14 @@
 					<label for="">Jurusan</label>
 				</div>
 				<div class="card-body">
-					{{-- @dd($jurusan) --}}
 					@foreach ($jurusan as $jrs)
-						<div class="d-flex form-check mr-2">
+						<div class="d-flex form-check mr-2">	
 							<?php
 								$name = 'jurusan[' . $loop->index . ']';
 								$selected = old($name);
-								if ($question->jurusan) {
+								if ($question && $question->has('jurusan')) {
+									// dd('');
+									// $ques
 									$result = $question->jurusan->contains($jrs->id);
 									if($result) {
 										$selected = true;
@@ -88,12 +92,12 @@
 						class="form-control"
 						placeholder="(Opsional) Masukkan jawaban..."
 					> {{ old('answer') ?? $question->get('answer') ?? null }} </textarea> --}}
-					@if ($question->pilgan || !empty($question->pilgan))
+					@if ($question->get('pilgan') !== null)
 						<div id="pilihan-col">
 							@foreach ($question->pilgan as $pilgan)
 								{{-- <input name="pilgan[{{ $loop->iteration }}]" type="text" class="form-control mb-2" placeholder="(Opsional) Pilihan {{ $loop->iteration }}" value="{{ $pilgan }}"> --}}
 								<div class="input-group input-group-sm mb-2">
-									<input name="pilgan[{{ $loop->iteration }}]" type="text" class="form-control" value="{{ $pilgan }}">
+									<input name="pilgan[{{ $loop->iteration }}]" type="text" class="form-control" value="{{ $pilgan }}" placeholder="(Opsional) Pilihan 1">
 									<span class="input-group-append">
 										<button type="button" class="btn btn-danger btn-flat" onclick="removeCol(this)">X</button>
 									</span>
@@ -104,7 +108,7 @@
 						<div id="pilihan-col">
 							{{-- <input name="pilgan[1]" type="text" class="form-control mb-2" placeholder="(Opsional) Pilihan 1"> --}}
 							<div class="input-group input-group-sm mb-2" hidden>
-								<input name="pilgan[1]" type="text" class="form-control">
+								<input name="pilgan[1]" type="text" class="form-control" placeholder="(Opsional) Pilihan 1">
 								<span class="input-group-append">
 									<button type="button" class="btn btn-danger btn-flat" onclick="removeCol(this)">X</button>
 								</span>
@@ -120,9 +124,10 @@
 			@push('html_scripts')
 				<script>
 					const container = document.getElementById('pilihan-col');
-					var inputCount = {{ $question->pilgan ? count($question->pilgan) : 1 }};
+					var inputCount = {{ isset($question->pilgan) ? count($question->pilgan) : 0 }};
 					const addCol = () => {
 						inputCount++;
+						console.log(inputCount)
 						if(inputCount > 5){
 								alert('Maksimal 5 pilihan.');
 								return;
@@ -169,7 +174,7 @@
 						id=""
 						class="form-control"
 						placeholder="(Opsional) Masukkan jawaban... / Nomor Pilihan yang benar"
-					>{{ old('answer') ?? $question->answer ?? null }}</textarea>
+					>{{ old('answer') ?? isset($question->answer) ? $question->answer : null }}</textarea>
 				</div>
 			</div>
 

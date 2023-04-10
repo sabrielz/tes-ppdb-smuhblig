@@ -46,7 +46,7 @@ class QuestionController extends Controller
 	{
 		return view('pages.dashboard.question.form', [
 			...$this->getQuestionFormPreload(),
-			'jurusan' => Jurusan::all()
+			'jurusan' => Jurusan::all(),
 		]);
 	}
 
@@ -83,7 +83,7 @@ class QuestionController extends Controller
 
     public function edit (Question $question) :View
     {
-			// dd($question->type->slug);
+			// dd($question->jurusan);
         return view('pages.dashboard.question.form', [
             'question' => $question,
 			'method' => 'edit',
