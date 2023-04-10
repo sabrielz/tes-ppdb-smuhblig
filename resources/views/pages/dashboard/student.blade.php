@@ -117,8 +117,24 @@
 					{ data: 'nama_lengkap' },
 					{ data: 'asal_sekolah' },
 					{ data: 'tanggal_lahir' },
-					{ data: 'jurusan.nama' },
-					{ data: 'jurusan.kode' },
+					{
+						data: null,
+						render: function (student) {
+							if (student && student.jurusan) {
+								return student.jurusan.nama
+							}
+							return '(empty)'
+						}
+					},
+					{
+						data: null,
+						render: function (student) {
+							if (student && student.jurusan) {
+								return student.jurusan.kode
+							}
+							return '(empty)'
+						}
+					},
 					{
 						data: null,
 						render: function (student) { // student === identitas model instance
@@ -133,7 +149,8 @@
 							// btnSeragamElement.attr('href', newSeragamHref)
 							btnTestElements.map((index, element) => {
 								// remove 0 value in [?student=0] query param
-								let hrefValue = $(element).attr('href').slice(0, -1) + (student.jurusan.kode || '')
+								let hrefValue = $(element).attr('href').slice(0, -1)
+								if (student.jurusan) { hrefValue += student.jurusan.kode || '' }
 								$(element).attr('href', hrefValue)
 							})
 
