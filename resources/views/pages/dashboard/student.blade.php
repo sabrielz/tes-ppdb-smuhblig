@@ -54,9 +54,9 @@
 			class="btn btn-secondary btn-student">
 			<i class="fa">W</i>
 		</a>
-		<a href="{{ route('dashboard.uniform.edit', ['uniform' => 0]) }}"
+		<a href="{{ route('dashboard.uniform.index', ['student' => 0]) }}"
 			title="Edit Seragam"
-			class="btn btn-secondary btn-uniform">
+			class="btn btn-secondary btn-student">
 			<i class="fa">S</i>
 		</a>
 	</div>
@@ -124,13 +124,13 @@
 						render: function (student) { // student === identitas model instance
 							let rawActionElement = $('#js-default-action-button-group').clone(),
 								btnTestElements = $(rawActionElement).find('a.btn-student'),
-								btnDetailElement = $(rawActionElement).find('button.btn-action').first(),
-								btnSeragamElement = $(rawActionElement).find('a.btn-uniform').first(),
-								newSeragamHref = btnSeragamElement.attr('href').slice(0, -1) + student.id
+								btnDetailElement = $(rawActionElement).find('button.btn-action').first()
+								// btnSeragamElement = $(rawActionElement).find('a.btn-uniform').first(),
+								// newSeragamHref = btnSeragamElement.attr('href').slice(0, -1) + student.id
 
 							rawActionElement.attr('hidden', null)
 							btnDetailElement.attr('onclick', 'fetchData('+student.id+')')
-							btnSeragamElement.attr('href', newSeragamHref)
+							// btnSeragamElement.attr('href', newSeragamHref)
 							btnTestElements.map((index, element) => {
 								// remove 0 value in [?student=0] query param
 								let hrefValue = $(element).attr('href').slice(0, -1) + (student.jurusan.kode || '')
