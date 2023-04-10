@@ -51,7 +51,8 @@ class Config extends Model
             $configs = $configs['value'];
         }
 
-        return Cache::rememberForever("config_$key", fn() => $configs);
+        return $configs;
+        // return Cache::rememberForever("config_$key", fn() => $configs);
     }
 
 }

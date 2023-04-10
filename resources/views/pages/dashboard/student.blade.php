@@ -54,7 +54,7 @@
 			class="btn btn-secondary btn-student">
 			<i class="fa">W</i>
 		</a>
-		<a href="{{ route('dashboard.uniform.index', ['student' => 0]) }}"
+		<a href="{{ route('dashboard.uniform.edit', ['student' => 0]) }}"
 			title="Edit Seragam"
 			class="btn btn-secondary btn-student">
 			<i class="fa">S</i>
@@ -154,9 +154,9 @@
 						counter = 1
 					},
 					success: function (result) {
-						if (result.data.length > 1) {
+						if (result.data && result.data.length > 1) {
 							datatable.rows.add(result.data)
-						}
+						} else console.log(result)
 						datatable.draw()
 					},
 					error: function (err) {

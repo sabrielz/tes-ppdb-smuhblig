@@ -27,6 +27,17 @@ class UniformController extends Controller
 		return $details = [];
 	}
 
+	public function index ()
+	{
+		$result = User::where('level_id', 1)->filter(request(['search', 'sort']))->whereHas('identitas', function($query) {
+			return $query->whereRelation('verifikasi', 'daftar_ulang', true);
+		})->with(['answers', 'identitas'])->groupBy('identitas_id')->paginate(15)->withQueryString();
+
+		return view('pages.dashboard.uniform.index', [
+			'students' => $result
+		]);
+	}
+
 	/**
 	 * Edit student uniform
 	 */
@@ -49,7 +60,7 @@ class UniformController extends Controller
 		}
 
 
-		return view('pages.dashboard.uniform', [
+		return view('pages.dashboard.uniform.edit', [
 			'siswa' => $result ?? null,
 			'student' => $student,
 			'allow_test' => $allow,

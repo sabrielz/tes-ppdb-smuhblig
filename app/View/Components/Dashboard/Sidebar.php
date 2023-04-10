@@ -36,7 +36,7 @@ class Sidebar extends Component
                 [
                     'label' => 'Semua Siswa',
                     'href' => '/dashboard/student',
-                    'icon' => 'fa fa-user',
+                    'icon' => 'fa fa-users',
                 ],
                 [
                     'label' => 'Tes Wawancara',
@@ -89,7 +89,19 @@ class Sidebar extends Component
                 [
                     'label' => 'Seragam',
                     'href' => '/dashboard/uniform',
-                    'icon' => 'fa fa-user-clothes',
+                    'icon' => 'fa fa-tshirt',
+                    'dropdowns' => [
+                        [
+                            'label' => 'Edit Seragam',
+                            'href' => '/dashboard/uniform/edit',
+                            'icon' => 'fa fa-edit'
+                        ],
+                        [
+                            'label' => 'Kelola Data',
+                            'href' => '/dashboard/uniform',
+                            'icon' => 'fa fa-database',
+                        ]
+                    ]
                 ],
 
                 [
