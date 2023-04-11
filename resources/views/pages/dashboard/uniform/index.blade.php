@@ -87,17 +87,9 @@
 								<td>{{ $loop->index + $students->firstItem() }}</td>
 								<td>{{ $answers->identitas->nama_lengkap ?? ''}}</td>
 								<td>{{ $answers->username }}</td>
-								<td>{{ $answers->identitas->seragam->ukuran_warepack ?? '(-)' }}</td>
+								<td>{{ $answers->identitas->seragam->ukuran_wearpack ?? '(-)' }}</td>
 								<td>{{ $answers->identitas->seragam->ukuran_olahraga ?? '(-)' }}</td>
 								<td>{{ $answers->identitas->seragam->ukuran_almamater ?? '(-)' }}</td>
-								<!-- <td>
-									<?php $tes = 'tes_'. request()->query('test') ?>
-									@if ($answers->status && $answers->status->$tes)
-										<span class="badge badge-success">Sudah Tes</span>
-									@else
-										<span class="badge badge-danger">Belum Tes</span>
-									@endif
-								</td> -->
 								<td>
 									<div class="btn-group btn-group-sm">
 

@@ -49,7 +49,11 @@
 									</label>
 									@foreach ($quest->ukuran as $ukuran)
 										<div class="d-inline-block form-check mr-2">
-											<input name="ukuran_{{ $quest->seragam }}" id="input-quest-{{ $quest->seragam }}-{{ $ukuran }}" type="radio" class="form-check-input" value="{{ $ukuran }}">
+											<?php
+												$checkVal = 'ukuran_'.$quest->seragam;
+												$selected = old($checkVal) == $ukuran || $ukuran == $student->identitas->seragam->$checkVal;
+											?>
+											<input name="ukuran_{{ $quest->seragam }}" id="input-quest-{{ $quest->seragam }}-{{ $ukuran }}" type="radio" class="form-check-input" value="{{ $ukuran }}" @checked($selected)>
 											<label for="input-quest-{{ $quest->seragam }}-{{ $ukuran }}" class="form-check-label">{{ $ukuran }}</label>
 										</div>
 									@endforeach

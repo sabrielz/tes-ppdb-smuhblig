@@ -24,7 +24,7 @@ class Seragam extends Model
 	protected $fillable = [
 		'ukuran_wearpack',
 		'ukuran_olahraga',
-		'ukuran_alamamater'
+		'ukuran_almamater'
 	];
 	
 	/**
