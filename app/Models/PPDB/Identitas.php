@@ -13,6 +13,12 @@ class Identitas extends Model
 	protected $table = 'identitas';
 	protected $with = ['jenis_kelamin'];
 
+	public function __construct(array $attributes = [])
+		{
+				$this->table = env('DB_DATABASE1').'.'.$this->table;
+				parent::__construct();
+		}
+
 	public function verifikasi()
 	{
 		return $this->hasOne(Verifikasi::class, 'identitas_id');

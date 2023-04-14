@@ -105,6 +105,29 @@ class Sidebar extends Component
                 ],
 
                 [
+                    'label' => 'Laporan',
+                    'href' => '/dashboard/laporan',
+                    'icon' => 'fa fa-file',
+                    'dropdowns' => [
+                        [
+                            'label' => 'Tes Fisik',
+                            'href' => '/dashboard/laporan?test=fisik',
+                            'icon' => 'fa fa-file-pdf',
+												],
+                        [
+                            'label' => 'Tes Wawancara',
+                            'href' => '/dashboard/laporan?test=wawancara',
+                            'icon' => 'fa fa-file-word',
+												],
+                        [
+                            'label' => 'Seragam',
+                            'href' => '/dashboard/laporan?test=seragam',
+                            'icon' => 'fa fa-tshirt',
+												],
+                    ]
+                ],
+
+                [
                     'label' => 'Log Out',
                     'href' => '/logout',
                     'icon' => 'fa fa-power-off',

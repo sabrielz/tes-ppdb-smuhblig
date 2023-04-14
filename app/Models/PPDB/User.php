@@ -141,6 +141,38 @@ class User extends Authenticatable
 					}
 					break;
 			}
+
+		});
+		$query->when($filters['jurusan'] ?? false, function($query, $jurusan) {
+			return $query->whereHas('identitas', function($query) use ($jurusan) {
+				return $query->whereHas('jurusan', function($query) use ($jurusan) {
+					return $query->where('singkatan', 'LIKE', '%'. $jurusan . '%');
+				});
+			});
+		});
+
+		$query->when($filters['status'] ?? false, function($query, $status) {
+			if ($status == 'sudah') {
+				return $query->whereHas('status', function($query) {
+					$query->where('tes_'.request('test'), true);
+				});
+			} else if($status == 'belum') {
+				return $query->doesntHave('status')->orWhereHas('status', function($query) {
+					$query->where('tes_'.request('test'), false);
+				});
+			}
+		});
+
+		$query->when($filters['ukur'] ?? false, function($query, $ukur) {
+			if ($ukur == 'sudah') {
+				return $query->whereHas('identitas', function($query) {
+					return $query->whereRelation('verifikasi', 'seragam', true);
+				});
+			} else if($ukur == 'belum') {
+				return $query->whereHas('identitas', function($query) {
+					return $query->whereRelation('verifikasi', 'seragam', false);
+				});
+			}
 		});
 	}
 

@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CetakController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\StatisticController;
@@ -87,4 +89,12 @@ Route::prefix('/dashboard')->middleware('auth')->group(function () {
         Route::get('/statistic/edit', 'edit')->name('dashboard.statistic.edit');
         Route::post('/statistic/edit', 'update')->name('dashboard.statistic.update');
     });
+
+		Route::controller(LaporanController::class)->group(function() {
+			Route::get('/laporan', 'index')->name('dashboard.laporan.index');
+		});
+
+		Route::controller(CetakController::class)->group(function() {
+			Route::get('/cetak', 'index')->name('dashboard.cetak.index');
+		});
 });

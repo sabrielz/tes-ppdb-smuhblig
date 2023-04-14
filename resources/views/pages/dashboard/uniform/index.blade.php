@@ -86,7 +86,7 @@
 							<tr>
 								<td>{{ $loop->index + $students->firstItem() }}</td>
 								<td>{{ $answers->identitas->nama_lengkap ?? ''}}</td>
-								<td>{{ $answers->username }}</td>
+								<td>{{ $answers->identitas->jurusan->kode }}</td>
 								<td>{{ $answers->identitas->seragam->ukuran_wearpack ?? '(-)' }}</td>
 								<td>{{ $answers->identitas->seragam->ukuran_olahraga ?? '(-)' }}</td>
 								<td>{{ $answers->identitas->seragam->ukuran_almamater ?? '(-)' }}</td>

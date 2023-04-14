@@ -17,11 +17,18 @@ class Question extends Model
 			'answer',
 			'pilgan'
 		];
+		protected $table = 'questions';
     protected $connection = 'mysql';
     protected $dates = ['deleted_at'];
 		protected $casts = [
 			'pilgan' => 'array'
 		];
+
+		public function __construct(array $attributes = [])
+		{
+				$this->table = env('DB_DATABASE').'.'.$this->table;
+				parent::__construct();
+		}
 
     public function getRouteKeyName() :string { return 'id'; }
 

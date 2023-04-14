@@ -11,6 +11,12 @@ class JurusanStudent extends Model
 
 		protected $connection = 'mysql1';
 		protected $table = 'jurusans';
+		
+		public function __construct(array $attributes = [])
+		{
+				$this->table = env('DB_DATABASE1').'.'.$this->table;
+				parent::__construct();
+		}
 
 		public function identitas()
 		{
