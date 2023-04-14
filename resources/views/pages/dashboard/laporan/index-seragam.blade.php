@@ -80,6 +80,7 @@
 							<th>Ukuran Warepack</th>
 							<th>Ukuran Olahraga</th>
 							<th>Ukuran Almamater</th>
+							<th>Tindakan</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -91,6 +92,16 @@
 								<td>{{ $answers->identitas->seragam->ukuran_wearpack ?? '(-)' }}</td>
 								<td>{{ $answers->identitas->seragam->ukuran_olahraga ?? '(-)' }}</td>
 								<td>{{ $answers->identitas->seragam->ukuran_almamater ?? '(-)' }}</td>
+								<td>
+									<div class="btn-group btn-group-sm">
+
+										{{-- Detail --}}
+										<button type="button" class="btn btn-info btn-action" id="detail-siswa-{{ $loop->iteration }}" title="Detail Siswa"
+											data-toggle="modal" data-target="#modal-detail-siswa" data-id="{{ $answers->identitas->id }}" onclick="fetchData({{ $answers->identitas->id }})">
+											<i class="fa fa-info"></i>
+										</button>
+									</div>
+								</td>
 							</tr>
 						@endforeach
 					</tbody>
